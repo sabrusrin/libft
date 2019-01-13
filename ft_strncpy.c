@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:26:48 by chermist          #+#    #+#             */
-/*   Updated: 2018/12/05 14:53:50 by chermist         ###   ########.fr       */
+/*   Updated: 2018/12/13 01:02:33 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	*ft_strncpy(char *dst, const char *src, size_t len)
 	size_t lsrc;
 
 	i = 0;
-	lsrc = 0;
 	lsrc = ft_strlen(src);
 	while (i < len)
 	{

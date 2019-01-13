@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:27:08 by chermist          #+#    #+#             */
-/*   Updated: 2018/12/02 23:23:29 by chermist         ###   ########.fr       */
+/*   Updated: 2018/12/12 23:59:49 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	int i;
-	int lens1;
+	char	*ps1;
 
-	i = 0;
-	lens1 = 0;
-	while (s1[lens1])
-		lens1++;
-	while (s2[i])
-		s1[lens1++] = s2[i++];
-	s1[lens1] = '\0';
-	return (s1);
+	ps1 = s1;
+	while (*s1)
+		s1++;
+	while (*s2)
+		*s1++ = *s2++;
+	*s1 = 0;
+	return (ps1);
 }
