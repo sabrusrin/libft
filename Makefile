@@ -6,7 +6,7 @@
 #    By: chermist <chermist@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2018/12/08 14:41:02 by chermist         ###   ########.fr        #
+#    Updated: 2019/01/26 16:06:29 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,16 +76,21 @@ SRCS =	ft_memset.c \
 		ft_realloc.c \
 		ft_lstappend.c
 
+HEADER = libft.h
+
 OBJ = $(SRCS:%.c=%.o)
 
 FLAGS = -Wall -Wextra -Werror -c
 
 all: $(NAME)
 
-$(NAME):
-		@gcc $(FLAGS) $(SRCS) -I libft.h
+$(NAME): $(OBJ)
 		@ar rc $(NAME) $(OBJ)
 		@ranlib $(NAME)
+
+%.o: %.c $(HEADER)
+	@gcc $(FLAGS) -c $< -o $@
+
 
 clean:
 		@rm -f $(OBJ)
