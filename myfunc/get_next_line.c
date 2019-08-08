@@ -6,7 +6,7 @@
 /*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:29:09 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/06 00:39:15 by chermist         ###   ########.fr       */
+/*   Updated: 2019/08/09 01:29:22 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*join_n_free(char **s1, char const *s2, int cen, int nb)
 		return (NULL);
 	if (cen > 0)
 	{
-		if (!(*s1 = ft_realloc(*s1, cen, cen + nb)))
+		if (!(*s1 = ft_realloc((void**)s1, cen, cen + nb)))
 			return (NULL);
 	}
 	else

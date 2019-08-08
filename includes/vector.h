@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   vector.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 15:22:53 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/08 19:50:16 by chermist         ###   ########.fr       */
+/*   Created: 2019/08/08 19:50:26 by chermist          #+#    #+#             */
+/*   Updated: 2019/08/08 20:57:00 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef VECTOR_H
+# define VECTOR_H
 
-void	ft_bzero(void *s, size_t n)
+# include "libft.h"
+
+typedef struct	s_vector
 {
-	unsigned char *pcp;
+	void	*data;
+	size_t	size;
+	size_t	type_sz;
+}				t_vector;
 
-	pcp = (unsigned char*)s;
-	if (n)
-		while (n--)
-			*pcp++ = '\0';
-}
+#endif

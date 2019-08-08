@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bzero.c                                         :+:      :+:    :+:   */
+/*   ft_resize.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 15:22:53 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/08 19:50:16 by chermist         ###   ########.fr       */
+/*   Created: 2019/08/09 00:36:42 by chermist          #+#    #+#             */
+/*   Updated: 2019/08/09 01:57:23 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "vector.h"
 
-void	ft_bzero(void *s, size_t n)
+void	ft_vresize(t_vector *v, size_t size)
 {
-	unsigned char *pcp;
+	void	*new;
 
-	pcp = (unsigned char*)s;
-	if (n)
-		while (n--)
-			*pcp++ = '\0';
+	if (v && size)	
+		v->data = ft_realloc(v-data, v->size, size);
 }

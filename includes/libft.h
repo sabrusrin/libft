@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:22:05 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/06 19:22:23 by chermist         ###   ########.fr       */
+/*   Updated: 2019/08/09 01:26:59 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-# include <string.h>
 # include <unistd.h>
-# include "./get_next_line.h"
+# include "get_next_line.h"
 
 typedef struct		s_list
 {
@@ -35,7 +34,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 void				*ft_arrdel(void **res);
-void				*ft_realloc(void *ptr, size_t prevsz, size_t newsz);
+void				*ft_realloc(void **ptr, size_t prevsz, size_t newsz);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strcpy(char *dst, const char *src);

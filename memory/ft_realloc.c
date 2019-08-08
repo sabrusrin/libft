@@ -6,25 +6,21 @@
 /*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/08 00:04:16 by chermist          #+#    #+#             */
-/*   Updated: 2019/01/09 17:13:35 by chermist         ###   ########.fr       */
+/*   Updated: 2019/08/09 01:32:24 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_realloc(void *ptr, size_t prevsz, size_t newsz)
+void	*ft_realloc(void **ptr, size_t prevsz, size_t newsz)
 {
 	void	*new;
 
-	if (!ptr)
+	if (!ptr && !(*ptr))
 		return (NULL);
 	if (!(new = ft_memalloc(newsz)))
-	{
-		free(ptr);
 		return (NULL);
-	}
-	ft_memcpy(new, ptr, (prevsz < newsz) ? prevsz : newsz);
-	free(ptr);
-	ptr = NULL;
+	ft_memcpy(new, *ptr, (prevsz < newsz) ? prevsz : newsz);
+	ft_memdel(ptr);
 	return (new);
 }
