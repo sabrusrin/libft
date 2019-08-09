@@ -6,7 +6,7 @@
 #    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/08/06 19:22:22 by chermist         ###   ########.fr        #
+#    Updated: 2019/08/09 17:28:35 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,10 +84,13 @@ MATH_F = ft_pow.c \
 		 ft_sqrt.c \
 		 ft_fabs.c
 
+VEC_F = ft_vnew.c \
+		ft_vresize.c
+
 
 MY_F  = get_next_line.c
 
-SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) $(MY_F) $(MATH_F)
+SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) $(MY_F) $(MATH_F) $(VEC_F)
 
 INC = -I./includes
 
@@ -101,8 +104,9 @@ vpath %.c utils
 vpath %.c lst
 vpath %.c myfunc
 vpath %.c math
+vpath %.c vector
 
-FLAGS = -Wall -Wextra -Werror -c
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 

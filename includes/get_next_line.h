@@ -6,17 +6,17 @@
 /*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:25:09 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/05 18:15:44 by chermist         ###   ########.fr       */
+/*   Updated: 2019/08/09 17:29:27 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include "libft.h"
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include "libft.h"
 
 # define BUFF_SIZE 1
 
