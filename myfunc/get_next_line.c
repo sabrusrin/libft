@@ -6,7 +6,7 @@
 /*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:29:09 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/09 01:29:22 by chermist         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:46:08 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ int		get_next_line(const int fd, char **line)
 		return (-1);
 	while ((rb = read(fd, buffer, BUFF_SIZE)))
 	{
-		if (!(curr_l->con = join_n_free((char**)&curr_l->con, buffer, curr_l->c_sz, rb)))
+		if (!(curr_l->con = join_n_free((char**)&curr_l->con,
+						buffer, curr_l->c_sz, rb)))
 			return (-1);
 		if ((curr_l->c_sz += rb) && (ft_strchr(buffer, '\n')))
 			break ;

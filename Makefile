@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: lkarlon- <lkarlon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/08/09 17:28:35 by chermist         ###   ########.fr        #
+#    Updated: 2019/09/11 15:21:39 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,7 +85,12 @@ MATH_F = ft_pow.c \
 		 ft_fabs.c
 
 VEC_F = ft_vnew.c \
-		ft_vresize.c
+		ft_vresize.c \
+		ft_vpush_back.c \
+		ft_vpop_back.c \
+		ft_vat.c \
+		ft_vclear.c \
+		ft_vdel.c
 
 
 MY_F  = get_next_line.c

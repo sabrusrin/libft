@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lkarlon- <lkarlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:22:05 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/09 17:24:16 by chermist         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:39:52 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n);
 void				*ft_memalloc(size_t size);
 void				ft_memdel(void **ap);
 void				*ft_arrdel(void **res);
-void				*ft_realloc(void **ptr, size_t prevsz, size_t newsz);
+void				*ft_realloc(void *ptr, size_t prevsz, size_t newsz);
 
 size_t				ft_strlen(const char *s);
 char				*ft_strcpy(char *dst, const char *src);
@@ -99,5 +99,5 @@ void				ft_lstappend(t_list *alst, t_list *new);
 int					ft_pow(int x, int power);
 int					ft_sqrt(int x);
 float				ft_fabs(float x);
-	
+
 #endif

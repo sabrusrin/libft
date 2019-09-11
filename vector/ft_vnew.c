@@ -6,22 +6,23 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:51:46 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/09 17:25:02 by chermist         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:23:25 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"vector.h"
+#include "vector.h"
 
-t_vector	*ft_vnew(size_t size, size_t type_sz)
+t_vec	*ft_vnew(size_t size, size_t type_sz)
 {
-	t_vector	*v;
+	t_vec	*v;
 
 	v = NULL;
-	if (size && type_sz && (v = (t_vector *)malloc(sizeof(t_vector))))
+	if (size && type_sz && (v = (t_vec*)malloc(sizeof(t_vec))))
 	{
 		v->type_sz = type_sz;
-		v->size = size;
-		if (!(v->data = malloc(size)))
+		v->capacity = size;
+		v->size = 0;
+		if (!(v->data = malloc(size * type_sz)))
 			ft_memdel((void**)&v);
 	}
 	return (v);

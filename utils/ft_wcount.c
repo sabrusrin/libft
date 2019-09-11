@@ -6,7 +6,7 @@
 /*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 19:28:56 by chermist          #+#    #+#             */
-/*   Updated: 2019/05/27 20:23:23 by chermist         ###   ########.fr       */
+/*   Updated: 2019/09/11 15:39:28 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_wcount(char const *s, char c)
 {
-	int		countw;
+	int			countw;
 	size_t		i;
 
 	i = 0;
