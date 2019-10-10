@@ -6,7 +6,7 @@
 #    By: lkarlon- <lkarlon-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/09/11 15:21:39 by chermist         ###   ########.fr        #
+#    Updated: 2019/09/19 19:06:19 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,14 +88,28 @@ VEC_F = ft_vnew.c \
 		ft_vresize.c \
 		ft_vpush_back.c \
 		ft_vpop_back.c \
+		ft_vdup.c \
 		ft_vat.c \
 		ft_vclear.c \
-		ft_vdel.c
+		ft_vdel.c \
+		ft_vback.c
 
+Q_F   = ft_qnew.c \
+		ft_qpush.c \
+		ft_qpop.c \
+		ft_qat.c \
+		ft_qback.c \
+		ft_qfront.c \
+		ft_qempty.c \
+		ft_qfull.c \
+		ft_qsize.c \
+		ft_qclear.c \
+		ft_qdel.c
 
 MY_F  = get_next_line.c
 
-SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) $(MY_F) $(MATH_F) $(VEC_F)
+SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) \
+		$(MY_F) $(MATH_F) $(VEC_F) $(MY_F) $(Q_F)
 
 INC = -I./includes
 
@@ -110,6 +124,7 @@ vpath %.c lst
 vpath %.c myfunc
 vpath %.c math
 vpath %.c vector
+vpath %.c queue
 
 FLAGS = -Wall -Wextra -Werror
 

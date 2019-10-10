@@ -1,29 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vnew.c                                          :+:      :+:    :+:   */
+/*   ft_qempty.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/08 19:51:46 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/19 18:30:46 by chermist         ###   ########.fr       */
+/*   Created: 2019/09/18 23:19:07 by chermist          #+#    #+#             */
+/*   Updated: 2019/09/18 23:34:16 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "queue.h"
 
-t_vec	*ft_vnew(size_t size, size_t type_sz)
+int	ft_qempty(t_queue *queue)
 {
-	t_vec	*v;
-
-	v = NULL;
-	if (size && type_sz && (v = (t_vec*)malloc(sizeof(t_vec))))
-	{
-		v->type_sz = type_sz;
-		v->capacity = size;
-		v->size = 0;
-		if (!(v->data = malloc(size * type_sz)))
-			ft_memdel((void**)&v);
-	}
-	return (v);
+	return (queue->size == 0);
 }

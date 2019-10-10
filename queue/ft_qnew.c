@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vnew.c                                          :+:      :+:    :+:   */
+/*   ft_qnew.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/08 19:51:46 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/19 18:30:46 by chermist         ###   ########.fr       */
+/*   Created: 2019/09/18 22:47:02 by chermist          #+#    #+#             */
+/*   Updated: 2019/09/20 02:15:40 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "queue.h"
 
-t_vec	*ft_vnew(size_t size, size_t type_sz)
+t_queue	*ft_qnew(size_t capacity, size_t type_sz)
 {
-	t_vec	*v;
+	t_queue *queue;
 
-	v = NULL;
-	if (size && type_sz && (v = (t_vec*)malloc(sizeof(t_vec))))
+	if ((queue = (t_queue*)malloc(sizeof(t_queue))))
 	{
-		v->type_sz = type_sz;
-		v->capacity = size;
-		v->size = 0;
-		if (!(v->data = malloc(size * type_sz)))
-			ft_memdel((void**)&v);
+		queue->capacity = capacity;
+		queue->type_sz = type_sz;
+		queue->elems = 0;
+		queue->size = 0;
+		queue->front = 0;
+		queue->rear = capacity - 1;
+		if (!(queue->data = malloc(type_sz * capacity)))
+			ft_memdel((void**)&queue);
 	}
-	return (v);
+	return (queue);
 }

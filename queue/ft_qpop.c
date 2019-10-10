@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vnew.c                                          :+:      :+:    :+:   */
+/*   ft_qpop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/08 19:51:46 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/19 18:30:46 by chermist         ###   ########.fr       */
+/*   Created: 2019/09/18 23:15:08 by chermist          #+#    #+#             */
+/*   Updated: 2019/09/20 02:15:42 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "queue.h"
 
-t_vec	*ft_vnew(size_t size, size_t type_sz)
+void	*ft_qpop(t_queue *queue)
 {
-	t_vec	*v;
+	void	*item;
 
-	v = NULL;
-	if (size && type_sz && (v = (t_vec*)malloc(sizeof(t_vec))))
-	{
-		v->type_sz = type_sz;
-		v->capacity = size;
-		v->size = 0;
-		if (!(v->data = malloc(size * type_sz)))
-			ft_memdel((void**)&v);
-	}
-	return (v);
+	if (ft_qempty(queue))
+		return (NULL);
+	item = (void*)&queue->data[queue->front * queue->type_sz];
+	queue->front = (queue->front + 1) % queue->capacity;
+	queue->size -= 1;
+	return (item);
 }

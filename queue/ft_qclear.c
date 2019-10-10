@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vnew.c                                          :+:      :+:    :+:   */
+/*   ft_qclear.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/08 19:51:46 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/19 18:30:46 by chermist         ###   ########.fr       */
+/*   Created: 2019/10/01 01:50:04 by chermist          #+#    #+#             */
+/*   Updated: 2019/10/10 16:40:54 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "queue.h"
 
-t_vec	*ft_vnew(size_t size, size_t type_sz)
+void	ft_qclear(t_queue *q)
 {
-	t_vec	*v;
-
-	v = NULL;
-	if (size && type_sz && (v = (t_vec*)malloc(sizeof(t_vec))))
+	if (q)
 	{
-		v->type_sz = type_sz;
-		v->capacity = size;
-		v->size = 0;
-		if (!(v->data = malloc(size * type_sz)))
-			ft_memdel((void**)&v);
+		if (q->data)
+			ft_memdel(&q->data);
+		q->elems = 0;
+		q->size = 0;
+		q->front = 0;
+		q->rear = q->capacity - 1;
 	}
-	return (v);
 }

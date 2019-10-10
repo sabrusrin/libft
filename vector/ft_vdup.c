@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_vnew.c                                          :+:      :+:    :+:   */
+/*   ft_vdup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/08 19:51:46 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/19 18:30:46 by chermist         ###   ########.fr       */
+/*   Created: 2019/09/19 16:50:29 by chermist          #+#    #+#             */
+/*   Updated: 2019/09/20 16:58:17 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.h"
 
-t_vec	*ft_vnew(size_t size, size_t type_sz)
+t_vec	*ft_vdup(t_vec *vsrc)
 {
-	t_vec	*v;
+	t_vec	*vdst;
 
-	v = NULL;
-	if (size && type_sz && (v = (t_vec*)malloc(sizeof(t_vec))))
+	if ((vdst = ft_vnew(vsrc->capacity, vsrc->type_sz)))
 	{
-		v->type_sz = type_sz;
-		v->capacity = size;
-		v->size = 0;
-		if (!(v->data = malloc(size * type_sz)))
-			ft_memdel((void**)&v);
+		ft_memmove(vdst->data, vsrc->data, vsrc->size * vsrc->type_sz);
+		vdst->size = vsrc->size;
+		return (vdst);
 	}
-	return (v);
+	return (NULL);
 }

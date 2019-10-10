@@ -6,7 +6,7 @@
 /*   By: lkarlon- <lkarlon-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:22:05 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/11 15:39:52 by chermist         ###   ########.fr       */
+/*   Updated: 2019/09/19 00:20:23 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include "get_next_line.h"
 # include "vector.h"
+# include "queue.h"
 
 typedef struct		s_list
 {
