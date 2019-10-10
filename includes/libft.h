@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lkarlon- <lkarlon-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:22:05 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/19 00:20:23 by chermist         ###   ########.fr       */
+/*   Updated: 2019/10/11 00:19:21 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "get_next_line.h"
 # include "vector.h"
 # include "queue.h"
+# include "ft_printf.h"
 
 typedef struct		s_list
 {
@@ -84,6 +85,10 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+int					l_ft_putchar(int c);
+int					l_ft_putstr(int *s, int i);
+void				u_ft_putnbr(unsigned long long n);
+void				l_ft_putnbr(long long n);
 
 int					ft_wcount(char const *s, char c);
 char				*ft_itoa(int n);
