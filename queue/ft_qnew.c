@@ -6,17 +6,17 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 22:47:02 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/20 02:15:40 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/16 21:46:29 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "queue.h"
 
-t_queue	*ft_qnew(size_t capacity, size_t type_sz)
+t_q	*ft_qnew(size_t capacity, size_t type_sz)
 {
-	t_queue *queue;
+	t_q *queue;
 
-	if ((queue = (t_queue*)malloc(sizeof(t_queue))))
+	if ((queue = (t_q*)malloc(sizeof(t_q))))
 	{
 		queue->capacity = capacity;
 		queue->type_sz = type_sz;

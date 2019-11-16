@@ -6,13 +6,13 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 23:42:03 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/18 23:43:51 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/16 21:57:45 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "queue.h"
 
-int	ft_qfull(t_queue *queue)
+int	ft_qfull(t_q *queue)
 {
-	return (queue->size == queue->capacity);
+	return (queue->elems == queue->capacity);
 }

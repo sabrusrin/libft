@@ -6,13 +6,13 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/01 04:08:26 by chermist          #+#    #+#             */
-/*   Updated: 2019/10/01 04:08:28 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/16 20:14:40 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "queue.h"
 
-void	*ft_qat(t_queue *q, size_t at)
+void	*ft_qat(t_q *q, size_t at)
 {
 	if (q)
 		return ((void*)&q->data[at * q->type_sz]);

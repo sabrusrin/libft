@@ -6,13 +6,13 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 23:19:07 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/18 23:34:16 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/16 20:15:47 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "queue.h"
 
-int	ft_qempty(t_queue *queue)
+int	ft_qempty(t_q *queue)
 {
 	return (queue->size == 0);
 }
