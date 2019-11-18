@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:08:38 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/18 17:45:36 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/18 20:59:35 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 void	set_default(t_pf *sup)
 {
+	sup->length = 0;
 	sup->hash = 0;
 	sup->zero = 0;
 	sup->minus = 0;
