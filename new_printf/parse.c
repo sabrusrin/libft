@@ -6,17 +6,37 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/18 21:27:00 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/18 22:42:50 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "f_printf.h"
 
+/*
+**	parses the type field
+*/
 void	parse_type(va_list ap, char **str, t_pf *sup)
 {
-
+	if (str && *str)
+	{
+		if (**str == 'd' || **str == 'i' || **str == 'D')
+			exe_int(ap, **str, sup);
+		else if (**str == 'o' || **str == 'O')
+			exe_octal(ap, **str, sup);
+		else if (**str == 'u' || **str == 'U')
+			exe_unsigned(ap, **str, sup);
+		else if (**str == 'x' || **str == 'X' || **str == 'p')
+			exe_hex(ap, **str, sup);
+		else if (**str == 'f' || **str == 'F')
+			exe_double(ap, **str, sup);
+		else if (**str == 'a' || **str == 'A')
+			write(1, "\nnot implemented yet ¯\_(ツ)_/¯\n", 31);
+		else if (**str == 'c' || **str == 'C')
+			exe_char(ap, **str, sup);
+		else if (**str == 's' || *str == 'S')
+			exe_string(ap, **str, sup);
+	}
 }
-
 /*
 **	parses the length field, that specifies the size of the argument
 */
@@ -43,7 +63,7 @@ void	parse_length_field(char **str, t_pf *sup)
 	}
 }
 /*
-**	parses width and precision
+**	parses width and precision fields
 */
 void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 {
@@ -66,7 +86,7 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 	}
 }
 /*
-**	will parse flags #0- +
+**	parses flags field; flags	#0- +
 */
 void	parse_flags(char **str, t_pf *sup)
 {
@@ -119,21 +139,3 @@ void	parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 		++str;
 	}
 }
-/*
-char	*parse_specifier(va_list ap, char *str, t_vec *buf, t_pf *sup)
-{
-	if (str)
-	{
-		if (*str == '%')
-			ft_vpush_back(buf, str, sizeof(char));
-		else
-		{
-			str = parse_flags(ap, str, sup);
-			str = parse_width_preci(ap, &str, sup);
-			str = parse_length_field(str, sup);
-			str = parse_type(ap, str, sup);
-		}
-	}
-	return (str);
-}
- */
