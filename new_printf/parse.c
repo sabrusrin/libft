@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/18 22:42:50 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/19 01:27:59 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,35 @@
 /*
 **	parses the type field
 */
-void	parse_type(va_list ap, char **str, t_pf *sup)
+
+void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 {
 	if (str && *str)
 	{
 		if (**str == 'd' || **str == 'i' || **str == 'D')
-			exe_int(ap, **str, sup);
+			exe_int(ap, **str, sup, buf);
 		else if (**str == 'o' || **str == 'O')
-			exe_octal(ap, **str, sup);
+			exe_octal_hex(ap, **str, sup, buf);
 		else if (**str == 'u' || **str == 'U')
-			exe_unsigned(ap, **str, sup);
+			exe_unsigned(ap, **str, sup, buf);
 		else if (**str == 'x' || **str == 'X' || **str == 'p')
-			exe_hex(ap, **str, sup);
+			exe_octal_hex(ap, **str, sup, buf);
 		else if (**str == 'f' || **str == 'F')
-			exe_double(ap, **str, sup);
+			exe_double(ap, **str, sup, buf);
 		else if (**str == 'a' || **str == 'A')
 			write(1, "\nnot implemented yet ¯\_(ツ)_/¯\n", 31);
 		else if (**str == 'c' || **str == 'C')
-			exe_char(ap, **str, sup);
+			exe_char_string(ap, **str, sup, buf);
 		else if (**str == 's' || *str == 'S')
-			exe_string(ap, **str, sup);
+			exe_char_string(ap, **str, sup, buf);
+		++(*str);
 	}
 }
+
 /*
 **	parses the length field, that specifies the size of the argument
 */
+
 void	parse_length_field(char **str, t_pf *sup)
 {
 	if (str && *str)
@@ -62,9 +66,11 @@ void	parse_length_field(char **str, t_pf *sup)
 			sup->length = 128;
 	}
 }
+
 /*
 **	parses width and precision fields
 */
+
 void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 {
 	if (str && *str)
@@ -85,9 +91,11 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 		}
 	}
 }
+
 /*
 **	parses flags field; flags	#0- +
 */
+
 void	parse_flags(char **str, t_pf *sup)
 {
 	set_default(sup);
@@ -111,9 +119,11 @@ void	parse_flags(char **str, t_pf *sup)
 			++(*str);
 		}
 }
+
 /*
 **	%[parameter][flags][width][.precision][length]type
 */
+
 void	parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 {
 	char	*str;
@@ -123,7 +133,7 @@ void	parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 	{
 		if (*str != '%')
 			ft_vpush_back(buf, str, sizeof(char));
- 		else if (*(++str))
+		else if (*(++str))
 		{
 			if (*str && *str == '%')
 				ft_vpush_back(buf, str++, sizeof(char));
@@ -132,7 +142,7 @@ void	parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 				parse_flags(&str, sup);
 				parse_width_preci(ap, &str, sup);
 				parse_length_field(&str, sup);
-				parse_type(ap, &str, sup);
+				parse_type(ap, &str, sup, buf);
 			}
 			continue ;
 		}
