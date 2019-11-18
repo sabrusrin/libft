@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: chermist <chermist@student.42.fr>          +#+  +:+       +#+         #
+#    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/10/11 00:15:13 by chermist         ###   ########.fr        #
+#    Updated: 2019/11/18 17:32:27 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ STR_F = ft_strlen.c \
 		ft_wcount.c
 
 CHR_F = ft_atoi.c \
+		ft_atoi_move.c \
 		ft_itoa.c \
 		ft_isalpha.c \
 		ft_isdigit.c \
