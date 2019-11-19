@@ -5,6 +5,6 @@
 int	main(void)
 {
 	int k;
-	printf("%zu", sizeof(wchar_t*));
+	printf("%zu   %zu", sizeof(ptrdiff_t), sizeof(wint_t));
 	return (1);
 }

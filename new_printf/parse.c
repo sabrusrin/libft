@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/19 01:27:59 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/19 21:44:27 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 		else if (**str == 'f' || **str == 'F')
 			exe_double(ap, **str, sup, buf);
 		else if (**str == 'a' || **str == 'A')
-			write(1, "\nnot implemented yet ¯\_(ツ)_/¯\n", 31);
+			write(1, "\nnot implemented yet ¯\\_(ツ)_/¯\n", 31);
 		else if (**str == 'c' || **str == 'C')
 			exe_char_string(ap, **str, sup, buf);
-		else if (**str == 's' || *str == 'S')
+		else if (**str == 's' || **str == 'S')
 			exe_char_string(ap, **str, sup, buf);
 		++(*str);
 	}
@@ -42,6 +42,8 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 
 /*
 **	parses the length field, that specifies the size of the argument
+**	Type size encodings:
+**	hh-1; h-2; l-4; ll-8; L-16; z-32; j-64; t-128
 */
 
 void	parse_length_field(char **str, t_pf *sup)
@@ -124,13 +126,15 @@ void	parse_flags(char **str, t_pf *sup)
 **	%[parameter][flags][width][.precision][length]type
 */
 
-void	parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
+int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 {
 	char	*str;
 
 	str = (char*)format;
 	while (*str)
 	{
+		if (sup->kill)
+			return (FALSE);
 		if (*str != '%')
 			ft_vpush_back(buf, str, sizeof(char));
 		else if (*(++str))
@@ -148,4 +152,5 @@ void	parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 		}
 		++str;
 	}
+	return (TRUE);
 }
