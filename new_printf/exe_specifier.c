@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 23:06:47 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/20 01:03:41 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/20 23:46:12 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,26 @@
 
 void	exe_int(va_list ap, char type, t_pf *sup, t_vec *buf)
 {
-/* 	if (type != 'D' && sup->length == 0)
-		putnbr_buf(va_arg(ap, int), sup, buf);
+	t_vec	*nbuf;
+
+	nbuf = ft_vnew(20, sizeof(char));
+ 	if (type != 'D' && sup->length == 0)
+		putnbr_buf(sup, buf, strnbr(va_arg(ap, int), nbuf));
 	else if (type != 'D' && sup->length == 1)
-		putnbr_buf(va_arg(ap, signed char), sup, buf);
+		putnbr_buf(sup, buf, strnbr_hh(va_arg(ap, int), nbuf));
 	else if (type != 'D' && sup->length == 2)
-		putnbr_buf(va_arg(ap, short), sup, buf);
+		putnbr_buf(sup, buf, strnbr_h(va_arg(ap, int), nbuf));
 	else if ((type != 'D' && sup->length == 4) ||\
 											(type == 'O' && sup->length == 0))
-		putnbr_buf(va_arg(ap, long), sup, buf);
+		putnbr_buf(sup, buf, strnbr(va_arg(ap, int), nbuf));
 	else if (type != 'D' && sup->length == 8)
-		putnbr_buf(va_arg(ap, long long), sup, buf);
-	else if (type != 'D' && sup->length == 64)
+		putnbr_buf(sup, buf, strnbr_ll(va_arg(ap, long long), nbuf));
+/* 	else if (type != 'D' && sup->length == 64)
 		putnbr_buf(va_arg(ap, intmax_t), sup, buf);
 	else if (type != 'D' && sup->length == 128)
-		putnbr_buf(va_arg(ap, ptrdiff_t), sup, buf);
- */}
+		putnbr_buf(va_arg(ap, ptrdiff_t), sup, buf); */
+	ft_vdel(&nbuf);
+}
 
 void	exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf)
 {

@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"complex": "c",
+		"stdio.h": "c",
+		"inttypes.h": "c"
+	}
+}
