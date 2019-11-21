@@ -6,50 +6,64 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 01:10:22 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 17:14:53 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "f_printf.h"
 
-void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
+void	precinbr(t_pf *sup, t_vec *buf, t_vec *nbuf, int len)
 {
-	size_t	len;
-	char	delim;
-	int		i;
-	int		flag;
+	int	i;
 
-	flag = 1;
 	i = 0;
-	ft_vpush_back(nbuf, "\0", sizeof(char));
-	len = nbuf->size - 1 + (sup->plus == '+' ? 1 : 0);
 	if (*(char*)ft_vat(nbuf, 0) == '-')
 		i = 1;
-	if (len < sup->preci || (i && (len - 1) < sup->preci))
-	{
-		if (i)
-			ft_vpush_back(buf, "-", sizeof(char));
-		else if (sup->plus == '+')
-		{
-			ft_vpush_back(buf, "+", sizeof(char));
-			flag = 0;
-		}
-		sup->preci -= (len < sup->preci ? len : len - 1);
-		if (!flag)
-			sup->preci++;
-		while (sup->preci--)
-			ft_vpush_back(buf, "0", sizeof(char));
-	}
-	else if(i)
+	if (sup->sign == '-')
 		ft_vpush_back(buf, "-", sizeof(char));
-
-	if (sup->width > 1)
-		sup->width = sup->width - ((sup->width > len) ? (len - 1) : sup->width);
-	put_width(buf, sup, 'R');
-	if (sup->plus == '+' && flag)
+	else if (sup->plus == '+')
+	{
 		ft_vpush_back(buf, "+", sizeof(char));
+		i = 1;
+	}
+	sup->preci -= ((len < sup->preci && !i) ? len : len - 1);
+	len += sup->preci;
+	sup->width -= ((sup->width > len) ? (len - 1) : sup->width);
+	put_width(buf, sup, 'R', ' ');
+	while (sup->preci--)
+		ft_vpush_back(buf, "0", sizeof(char));
+}
+
+void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
+{
+	int	len;
+	int	wlen;
+	int	i;
+
+	i = 0;
+	sup->sign = (*(char*)ft_vat(nbuf, 0) != '-') ? '+' : '-';
+	len = (int)nbuf->size;
+	if (*(char*)ft_vat(nbuf, 0) == '-')
+		i = 1;
+	wlen = len + ((sup->plus == '+' && !i) ? 1 : 0);
+	if (sup->preci > len || (i && sup->preci > (len - 1)))
+		precinbr(sup, buf, nbuf, wlen);
+	else if (sup->zero == '0' && sup->minus != '-')
+	{
+		if (sup->plus == '+')
+			ft_vpush_back(buf, &sup->sign, sizeof(char));
+		sup->width -= ((sup->width > wlen) ? (wlen - 1) : sup->width);
+		put_width(buf, sup, 'R', '0');
+	}
+	else
+	{
+		sup->width -= ((sup->width > wlen) ? (wlen - 1) : sup->width);
+		put_width(buf, sup, 'R', ' ');
+		if (sup->plus == '+' && sup->sign == '+')
+			ft_vpush_back(buf, "+", sizeof(char));
+	}
+	len -= ((sup->plus == '+' && !i) ? 1 : 0);
 	while (i < len)
 		ft_vpush_back(buf, ft_vat(nbuf, i++), sizeof(char));
-//	str_to_buf(nbuf->data, buf);
-	put_width(buf, sup, 'L');
+	put_width(buf, sup, 'L', ' ');
 }

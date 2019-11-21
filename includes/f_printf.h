@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/20 23:41:51 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 16:38:11 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_pf
 	char			minus;
 	char			space;
 	char			plus;
+	char			sign;
 	size_t			width;
 	int				preci;
 	int				kill;
@@ -44,7 +45,7 @@ int					parse_format(va_list ap, const char *format, t_vec *buf,\
 																	t_pf *sup);
 void				set_default(t_pf *sup);
 int					ft_wildcard(va_list ap, char **str, t_pf *sup);
-void				put_width(t_vec *buf, t_pf *sup, char pos);
+void				put_width(t_vec *buf, t_pf *sup, char pos, char delim);
 
 void				exe_int(va_list ap, char type, t_pf *sup, t_vec *buf);
 void				exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf);
