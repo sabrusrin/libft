@@ -23,17 +23,50 @@ int	main(void)
 	d = printf("42%56.44ls42", L"こんにちは、私はprintf単体テストです");
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("42%20.16zd42", -294712504);
+	d = ft_printf("!% 42.31hhd!", (char)1349783);
 	printf("\n%d\n", d);
-	d = printf("42%20.16zd42", -294712504);
+	d = printf("!% 42.31hhd!", (char)1349783);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("42%+48.32zd42", 0);
+	printf("\n%d\n", d);
+	d = printf("42%+48.32zd42", 0);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("!%20.18zd!", 0);
+	printf("\n%d\n", d);
+	d = printf("!%20.18zd!", 0);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf(">------------<%48.24zd>------------<", 0);
+	printf("\n%d\n", d);
+	d = printf(">------------<%48.24zd>------------<", 0);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("\\!/%+56.33hhd\\!/", -1040849184);
+	printf("\n%d\n", d);
+	d = printf("\\!/%+56.33hhd\\!/", -1040849184);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("^.^/%043.2zd^.^/", 29934278);
+	printf("\n%d\n", d);
+	d = printf("^.^/%043.2zd^.^/", 29934278);
 	printf("\n%d\n", d);
 
-	d = ft_printf("|%2lc|", (char)9876);
+	d = ft_printf("%016zd", 0);
 	printf("\n%d\n", d);
-	d = printf("|%2lc|", (char)9876);
+	d = printf("%016zd", 0);
+	printf("\n%d\n\n", d);
+
+/* 	d = ft_printf("!%20.18zd!", 0);
 	printf("\n%d\n", d);
+	d = printf("!%20.18zd!", 0);
+	printf("\n%d\n\n", d); */
+
 
 	//printf("\n\n%zd %zd - %zu", -40, 40, sizeof(size_t));
 	//printf("%zu   %zu   |%-05d|, %s", sizeof(ptrdiff_t), sizeof(signed int), -10, "%-05d");
 	return (1);
 }
+/*alias rt='make re; ./run_test -e d'*/
+/*alias tt='gcc -o test test.c -I ../includes -L ../ -lftprintf; ./test'*/

@@ -3,5 +3,6 @@
 		"complex": "c",
 		"stdio.h": "c",
 		"inttypes.h": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "Disabled"
 }

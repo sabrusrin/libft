@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:08:38 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 21:35:04 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/22 17:41:22 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_printf(const char *format, ...)
 	int		sz;
 
 	sz = 0;
-	if ((buf = ft_vnew(100, sizeof(char))))
+	if ((buf = ft_vnew(1000, sizeof(char))))
 	{
 		va_start(ap, format);
 		set_default(&sup);

@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 22:09:21 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/22 02:31:04 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/22 17:28:36 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 		sup->preci = ((size_t)sup->preci > len) ? len : sup->preci;
 		len = sup->preci;
 	}
-	sup->width = sup->width - ((sup->width > len) ? (len - 1) : sup->width);
-	put_width(buf, sup, 'R', ' ');
+	sup->width -= ((sup->width > len) ? len : sup->width);
+	put_full_width(buf, sup, 'R', ' ');
 	if (sup->preci < 0)
 		str_to_buf(s, buf);
 	else
@@ -78,7 +78,7 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 			ft_vpush_back(buf, s++, sizeof(char));
 			sup->preci--;
 		}
-	put_width(buf, sup, 'L', ' ');
+	put_full_width(buf, sup, 'L', ' ');
 }
 
 /*
@@ -132,13 +132,13 @@ void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 		sup->preci = ((size_t)sup->preci > len) ? len : sup->preci;
 		len = sup->preci;
 	}
-	sup->width = sup->width - ((sup->width > len) ? len : sup->width);
+	sup->width -= (sup->width > len) ? len : sup->width;
 /* 	ft_putchar('|');
 	ft_putnbr(len);
 	ft_putchar('|');
 	ft_putnbr(sup->width);
 	ft_putchar('\n'); */
-	put_width(buf, sup, 'R', ' ');
+	put_full_width(buf, sup, 'R', ' ');
 	if (sup->preci < 0)
 		while (*s)
 			buf_wchar(*(s++), buf, 0);
@@ -152,5 +152,5 @@ void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 				(sup->preci > wchar_bytes(*s) ? wchar_bytes(*s) : sup->preci));
 			s++;
 		}
-	put_width(buf, sup, 'L', ' ');
+	put_full_width(buf, sup, 'L', ' ');
 }

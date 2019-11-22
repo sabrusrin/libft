@@ -6,11 +6,16 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 18:31:37 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 18:47:56 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/22 18:34:43 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+/* void	itoa_printf(intmax_t num, t_vec * nbuf)
+{
+
+} */
 
 t_vec	*strnbr(int n, t_vec *nbuf)
 {
@@ -56,7 +61,6 @@ t_vec	*strnbr_h(short n, t_vec *nbuf)
 	{
 		num = n + '0';
 		ft_vpush_back(nbuf, &num, sizeof(char));
-		ft_vpush_back(nbuf, "\0", sizeof(char));
 		return (nbuf);
 	}
 	strnbr_h(n / 10, nbuf);
@@ -83,7 +87,6 @@ t_vec	*strnbr_hh(signed char n, t_vec *nbuf)
 	{
 		num = n + '0';
 		ft_vpush_back(nbuf, &num, sizeof(char));
-		ft_vpush_back(nbuf, "\0", sizeof(char));
 		return (nbuf);
 	}
 	strnbr_hh(n / 10, nbuf);
@@ -110,7 +113,6 @@ t_vec	*strnbr_ll(long long n, t_vec *nbuf)
 	{
 		num = n + '0';
 		ft_vpush_back(nbuf, &num, sizeof(char));
-		ft_vpush_back(nbuf, "\0", sizeof(char));
 		return (nbuf);
 	}
 	strnbr_ll(n / 10, nbuf);

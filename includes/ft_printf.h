@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 22:14:46 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/22 17:25:54 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int					parse_format(va_list ap, const char *format, t_vec *buf,\
 void				set_default(t_pf *sup);
 int					ft_wildcard(va_list ap, char **str, t_pf *sup);
 void				put_width(t_vec *buf, t_pf *sup, char pos, char delim);
+void				put_full_width(t_vec *buf, t_pf *sup, char pos, char delim);
 
 void				exe_int(va_list ap, char type, t_pf *sup, t_vec *buf);
 void				exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf);

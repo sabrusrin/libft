@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 20:27:16 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/22 20:07:16 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	parse_length_field(char **str, t_pf *sup)
 	{
 		if (**str == 'h' && *(*str + 1) == 'h' && (*str += 2))
 			sup->length = 1;
+		else if (**str == 'l' && *(*str + 1) == 'l' && (*str += 2))
+			sup->length = 8;
 		else if (**str == 'h' && ++(*str))
 			sup->length = 2;
 		else if (**str == 'l' && ++(*str))
 			sup->length = 4;
-		else if (**str == 'l' && *(*str + 1) == 'l' && (*str += 2))
-			sup->length = 8;
 		else if (**str == 'L' && ++(*str))
 			sup->length = 16;
 		else if (**str == 'z' && ++(*str))
