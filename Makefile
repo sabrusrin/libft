@@ -6,11 +6,11 @@
 #    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/11/18 17:32:27 by chermist         ###   ########.fr        #
+#    Updated: 2019/11/21 21:25:23 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = libftprintf.a
 
 MEM_F = ft_memset.c \
 		ft_bzero.c \
@@ -114,13 +114,13 @@ Q_F   = ft_qnew.c \
 MY_F  = get_next_line.c
 
 PRINTF = ft_printf.c \
-		ft.c \
-		arg_exe.c \
-		assist.c \
-		flags_exe.c \
 		parse.c \
-		printf_cs.c \
-		printf_dfox.c
+		exe_specifier.c \
+		strnbr.c \
+		buf_char.c \
+		buf_string.c \
+		buf_int.c \
+		support.c \
 
 SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) \
 		$(MY_F) $(MATH_F) $(VEC_F) $(MY_F) $(Q_F) $(PRINTF)
@@ -140,7 +140,6 @@ vpath %.c math
 vpath %.c vector
 vpath %.c queue
 vpath %.c ft_printf
-vpath %.c ft_printf/support
 
 FLAGS = -Wall -Wextra -Werror
 

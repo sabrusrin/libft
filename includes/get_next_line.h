@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 20:25:09 by chermist          #+#    #+#             */
-/*   Updated: 2019/08/09 17:29:27 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 19:11:55 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "libft.h"
 
 # define BUFF_SIZE 1
 

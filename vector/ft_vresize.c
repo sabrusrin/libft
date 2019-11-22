@@ -6,11 +6,11 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 17:21:12 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/11 15:27:35 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 19:14:52 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "libft.h"
 
 void	ft_vresize(t_vec *v, size_t size)
 {
