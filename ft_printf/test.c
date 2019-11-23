@@ -23,7 +23,12 @@ int	main(void)
 	d = printf("42%56.44ls42", L"こんにちは、私はprintf単体テストです");
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("|%0#15x|", -355555);
+	d = ft_printf("\\!/%2.2ls\\!/", L"┬─┬﻿ ノ( ゜-゜ノ)");
+	printf("\n%d\n", d);
+	d = printf("\\!/%2.2ls\\!/", L"┬─┬﻿ ノ( ゜-゜ノ)");
+	printf("\n%d\n\n", d);
+
+/* 	d = ft_printf("|%0#15x|", -355555);
 	printf("\n%d\n", d);
 	d = printf("|%0#15x|", -355555);
 	printf("\n%d\n\n", d);
@@ -33,11 +38,26 @@ int	main(void)
 	d = printf("\\!/%8.16hhD\\!/", 3480415246880446420);
 	printf("\n%d\n\n", d);
 
-	d = ft_printf(">------------<%63.60zx>------------<", 0);
+	d = ft_printf("42%032.2zx42", 416065976);
 	printf("\n%d\n", d);
-	d = printf(">------------<%63.60zx>------------<", 0);
+	d = printf("42%032.2zx42", 416065976);
 	printf("\n%d\n\n", d);
 
+	d = ft_printf("^.^/%#29.2zx^.^/", -1228020156);
+	printf("\n%d\n", d);
+	d = printf("^.^/%#29.2zx^.^/", -1228020156);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("^.^/%#27.22zo^.^/", 1238082569);
+	printf("\n%d\n", d);
+	d = printf("^.^/%#27.22zo^.^/", 1238082569);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("\\!/%#58.12zo\\!/", -215076898);
+	printf("\n%d\n", d);
+	d = printf("\\!/%#58.12zo\\!/", -215076898);
+	printf("\n%d\n\n", d);
+ */
 
 /* 	d = ft_printf("!% 42.31hhd!", (char)1349783);
 	printf("\n%d\n", d);

@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 23:06:47 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/23 19:40:51 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 00:47:37 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ void	exe_int(va_list ap, char type, t_pf *sup, t_vec *buf)
 		putnbr_buf(sup, buf, itoa_buf((intmax_t)va_arg(ap, ssize_t), nbuf));
 	else if (sup->length == 64)
 		putnbr_buf(sup, buf, itoa_buf(va_arg(ap, intmax_t), nbuf));
-/* 	else if (sup->length == 128)
-		putnbr_buf(va_arg(ap, ptrdiff_t), sup, buf); */
+ 	else if (sup->length == 128)
+		putnbr_buf(sup, buf, itoa_buf(va_arg(ap, __PTRDIFF_TYPE__), nbuf));
 	ft_vdel(&nbuf);
 }
 

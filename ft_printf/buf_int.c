@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/23 19:45:15 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 00:35:39 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,29 +101,29 @@ void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
 	int		wlen;
 	int		n;
 	int		i;
+	int		preci;
 
 	n = 0;
 	i = 0;
+	hash = NULL;
 	len = nbuf->size;
+	preci = sup->preci;
 	sup->preci -= (sup->preci > 0 && sup->preci > len) ? len : sup->preci;
 	wlen = len + sup->preci;
-	if (sup->hash == '#')
+	if (sup->hash == '#' && (type == 'x' || type == 'X' || type == 'p'))
 	{
-		if (type == 'x' || type == 'X')
+		hash = (type != 'X' ? "0x" : "0X");
+		n = 2;
+	}
+	else if (sup->hash == '#' && (type == 'o' || type == 'O'))
+	{
+		if (sup->preci > 0)
 		{
-			hash = (type == 'x' ? "0x" : "0X");
-			n = 2;
+			sup->preci -= 1;
+			wlen -= 1;
 		}
-		else if (type == 'o' || type == 'O')
-		{
-			hash = "0";
-			n = 1;
-		}
-		else if (type == 'p')
-		{
-			hash = "0x";
-			n = 2;
-		}
+		hash = "0";
+		n = 1;
 	}
 	sup->width -= (sup->width > (size_t)wlen + n) ? wlen + n : sup->width;
 	if (sup->preci > 0)
@@ -134,7 +134,7 @@ void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
 		while (sup->preci--)
 			ft_vpush_back(buf, "0", sizeof(char));
 	}
-	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0)
+	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0 && preci == -1)
 	{
 		while (n--)
 			ft_vpush_back(buf, hash++, sizeof(char));
@@ -142,9 +142,9 @@ void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
 	}
 	else
 	{
+		put_full_width(buf, sup, 'R', ' ');
 		while (n--)
 			ft_vpush_back(buf, hash++, sizeof(char));
-		put_full_width(buf, sup, 'R', ' ');
 	}
 	while (i < len)
 		ft_vpush_back(buf, ft_vat(nbuf, i++), sizeof(char));
