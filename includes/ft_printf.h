@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/22 17:25:54 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/23 13:42:46 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ void				putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf);
 
 int					buf_wchar(wchar_t c, t_vec *buf, int bytes);
 void				str_to_buf(char *s, t_vec *buf);
-t_vec				*strnbr(int n, t_vec *nbuf);
-t_vec				*strnbr_hh(signed char n, t_vec *nbuf);
-t_vec				*strnbr_h(short n, t_vec *nbuf);
-t_vec				*strnbr_ll(long long n, t_vec *nbuf);
+t_vec				*strnbr_buf(long long n, t_vec *nbuf);
+t_vec				*strunbr_buf(unsigned long long n, t_vec *nbuf);
 
 #endif

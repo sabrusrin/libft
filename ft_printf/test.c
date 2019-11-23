@@ -23,7 +23,10 @@ int	main(void)
 	d = printf("42%56.44ls42", L"こんにちは、私はprintf単体テストです");
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("!% 42.31hhd!", (char)1349783);
+	d = printf("|%#lx|", 5);
+	printf("\n%d\n\n", d);
+
+/* 	d = ft_printf("!% 42.31hhd!", (char)1349783);
 	printf("\n%d\n", d);
 	d = printf("!% 42.31hhd!", (char)1349783);
 	printf("\n%d\n\n", d);
@@ -57,7 +60,7 @@ int	main(void)
 	printf("\n%d\n", d);
 	d = printf("%016zd", 0);
 	printf("\n%d\n\n", d);
-
+ */
 /* 	d = ft_printf("!%20.18zd!", 0);
 	printf("\n%d\n", d);
 	d = printf("!%20.18zd!", 0);

@@ -6,11 +6,15 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/23 00:30:10 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/23 02:30:31 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+/*
+**	padding functions put padding if needed, respecting all the other flags
+*/
 
 void	zero_padding(t_pf *sup, t_vec *buf, int wlen, int i)
 {
@@ -33,7 +37,12 @@ void	space_padding(t_pf *sup, t_vec *buf, int wlen, int i)
 		ft_vpush_back(buf, &sup->sign, sizeof(char));
 }
 
-void	precinbr(t_pf *sup, t_vec *buf, t_vec *nbuf, int len)
+/*
+**	precision_nbr - puts precision zeros to the buffer,
+**	respecting all the other flags
+*/
+
+void	precision_nbr(t_pf *sup, t_vec *buf, t_vec *nbuf, int len)
 {
 	int	i;
 
@@ -57,6 +66,11 @@ void	precinbr(t_pf *sup, t_vec *buf, t_vec *nbuf, int len)
 		ft_vpush_back(buf, "0", sizeof(char));
 }
 
+/*
+**	putnbr_buf - considers the padding, precision and flags then puts
+**	the number to the ft_printf buffer
+*/
+
 void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 {
 	int	len;
@@ -70,7 +84,7 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 		i = 1;
 	wlen = len + ((!i && (sup->plus == '+' || sup->space == ' ')) ? 1 : 0);
 	if (sup->preci > len || (i && sup->preci > (len - 1)))
-		precinbr(sup, buf, nbuf, wlen);
+		precision_nbr(sup, buf, nbuf, wlen);
 	else if (sup->zero == '0' && sup->minus != '-' && sup->preci == -1)
 		zero_padding(sup, buf, wlen, i);
 	else
