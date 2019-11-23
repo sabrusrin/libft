@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 23:06:47 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/23 14:05:55 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/23 19:40:51 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,69 +24,73 @@ void	exe_int(va_list ap, char type, t_pf *sup, t_vec *buf)
 	t_vec	*nbuf;
 
 	nbuf = ft_vnew(20, sizeof(char));
- 	if (type != 'D' && sup->length == 0)
-		putnbr_buf(sup, buf, strnbr_buf(va_arg(ap, int), nbuf));
-	else if (type != 'D' && sup->length == 1)
-		putnbr_buf(sup, buf, strnbr_buf((signed char)va_arg(ap, int), nbuf));
-	else if (type != 'D' && sup->length == 2)
-		putnbr_buf(sup, buf, strnbr_buf((short)va_arg(ap, int), nbuf));
-	else if ((type != 'D' && sup->length == 4) ||\
-											(type == 'D' && sup->length == 0))
-		putnbr_buf(sup, buf, strnbr_buf(va_arg(ap, int), nbuf));
-	else if (type != 'D' && sup->length == 8)
-		putnbr_buf(sup, buf, strnbr_buf(va_arg(ap, long long), nbuf));
-	else if (type != 'D' && sup->length == 32)
-		putnbr_buf(sup, buf, strnbr_buf((intmax_t)va_arg(ap, ssize_t), nbuf));
- 	else if (type != 'D' && sup->length == 64)
-		putnbr_buf(sup, buf, strnbr_buf(va_arg(ap, intmax_t), nbuf));
-/*	else if (type != 'D' && sup->length == 128)
+	if ((type != 'D' && sup->length == 4) || type == 'D')
+		putnbr_buf(sup, buf, itoa_buf(va_arg(ap, long), nbuf));
+	else if (sup->length == 0)
+		putnbr_buf(sup, buf, itoa_buf(va_arg(ap, int), nbuf));
+	else if (sup->length == 1)
+		putnbr_buf(sup, buf, itoa_buf((signed char)va_arg(ap, int), nbuf));
+	else if (sup->length == 2)
+		putnbr_buf(sup, buf, itoa_buf((short)va_arg(ap, int), nbuf));
+	else if (sup->length == 8)
+		putnbr_buf(sup, buf, itoa_buf(va_arg(ap, long long), nbuf));
+	else if (sup->length == 32)
+		putnbr_buf(sup, buf, itoa_buf((intmax_t)va_arg(ap, ssize_t), nbuf));
+	else if (sup->length == 64)
+		putnbr_buf(sup, buf, itoa_buf(va_arg(ap, intmax_t), nbuf));
+/* 	else if (sup->length == 128)
 		putnbr_buf(va_arg(ap, ptrdiff_t), sup, buf); */
 	ft_vdel(&nbuf);
 }
 
-/* void	exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf)
+void	exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf)
 {
-	if (type == 'p' && sup->length == 0)
-		putbase_buf(va_arg(ap, long int), type, sup, buf);
-	else if (type == 'O' && sup->length == 0)
-		putbase_buf(va_arg(ap, unsigned long), type, sup, buf);
-	else if (type != 'O' && sup->length == 0)
-		putbase_buf(va_arg(ap, unsigned int), type, sup, buf);
-	else if (type != 'O' && sup->length == 1)
-		putbase_buf(va_arg(ap, unsigned char), type, sup, buf);
-	else if (type != 'O' && sup->length == 2)
-		putbase_buf(va_arg(ap, unsigned short), type, sup, buf);
-	else if (type != 'O' && sup->length == 4)
-		putbase_buf(va_arg(ap, unsigned long), type, sup, buf);
-	else if (type != 'O' && sup->length == 8)
-		putbase_buf(va_arg(ap, unsigned long long), type, sup, buf);
-	else if (type != 'O' && sup->length == 32)
-		putbase_buf(va_arg(ap, size_t), type, sup, buf);
-	else if (type != 'O' && sup->length == 64)
-		putbase_buf(va_arg(ap, uintmax_t), type, sup, buf);
-} */
-
-void	exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf)
-{
-
 	t_vec	*nbuf;
 
 	nbuf = ft_vnew(20, sizeof(char));
-	if (type == 'u' && sup->length == 0)
-		putnbr_buf(sup, buf, strunbr_buf(va_arg(ap, uint32_t), nbuf));
-	else if (type == 'u' && sup->length == 1)
-		putnbr_buf(sup, buf, strunbr_buf((uint8_t)va_arg(ap, uint32_t), nbuf));
-	else if (type == 'u' && sup->length == 2)
-		putnbr_buf(sup, buf, strunbr_buf((uint16_t)va_arg(ap, uint32_t), nbuf));
-	else if ((type == 'u' && sup->length == 4) ||\
-											(type == 'U' && sup->length == 0))
-		putnbr_buf(sup, buf, strunbr_buf(va_arg(ap, unsigned long), nbuf));
-	else if (type == 'u' && sup->length == 8)
-		putnbr_buf(sup, buf, strunbr_buf(va_arg(ap, uint64_t), nbuf));
-	else if (type == 'u' && sup->length == 32)
-		putnbr_buf(sup, buf, strunbr_buf(va_arg(ap, size_t), nbuf));
-	else if (type == 'u' && sup->length == 64)
-		putnbr_buf(sup, buf, strunbr_buf(va_arg(ap, uintmax_t), nbuf));
+	if ((type != 'O' && sup->length == 4) || type == 'O' || type == 'p')
+		putbase_buf(sup, buf, type, \
+			itoa_base_buf(va_arg(ap, unsigned long), nbuf, sup, type));
+	else if (sup->length == 0)
+		putbase_buf(sup, buf, type, \
+			itoa_base_buf(va_arg(ap, uint32_t), nbuf, sup, type));
+	else if (sup->length == 1)
+		putbase_buf(sup, buf, type, \
+			itoa_base_buf((uint8_t)va_arg(ap, uint32_t), nbuf, sup, type));
+	else if (sup->length == 2)
+		putbase_buf(sup, buf, type, \
+			itoa_base_buf((uint16_t)va_arg(ap, uint32_t), nbuf, sup, type));
+	else if (sup->length == 8)
+		putbase_buf(sup, buf, type, \
+			itoa_base_buf(va_arg(ap, uint64_t), nbuf, sup, type));
+	else if (sup->length == 32)
+		putbase_buf(sup, buf, type, \
+			itoa_base_buf(va_arg(ap, size_t), nbuf, sup, type));
+	else if (sup->length == 64)
+		putbase_buf(sup, buf, type, \
+			itoa_base_buf(va_arg(ap, uintmax_t), nbuf, sup, type));
+	ft_vdel(&nbuf);
+}
+
+void	exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf)
+{
+	t_vec	*nbuf;
+
+	nbuf = ft_vnew(20, sizeof(char));
+	if ((type == 'u' && sup->length == 4) || type == 'U')
+		putnbr_buf(sup, buf, uitoa_buf(va_arg(ap, unsigned long), nbuf));
+	else if (sup->length == 0)
+		putnbr_buf(sup, buf, uitoa_buf(va_arg(ap, uint32_t), nbuf));
+	else if (sup->length == 1)
+		putnbr_buf(sup, buf, uitoa_buf((uint8_t)va_arg(ap, uint32_t), nbuf));
+	else if (sup->length == 2)
+		putnbr_buf(sup, buf, uitoa_buf((uint16_t)va_arg(ap, uint32_t), nbuf));
+	else if (sup->length == 8)
+		putnbr_buf(sup, buf, uitoa_buf(va_arg(ap, uint64_t), nbuf));
+	else if (sup->length == 32)
+		putnbr_buf(sup, buf, uitoa_buf(va_arg(ap, size_t), nbuf));
+	else if (sup->length == 64)
+		putnbr_buf(sup, buf, uitoa_buf(va_arg(ap, uintmax_t), nbuf));
 	ft_vdel(&nbuf);
 }
 

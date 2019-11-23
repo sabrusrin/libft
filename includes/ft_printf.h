@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/23 13:42:46 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/23 19:39:46 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void				exe_char_string(va_list ap, char type, t_pf *sup,\
 void				exe_double(va_list ap, char type, t_pf *sup, t_vec *buf);
 
 void				putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf);
+void				putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf);
 /*void				putunbr_buf(unsigned long long num, t_pf *sup, t_vec *buf);
 void				putbase_buf(uintmax_t num, char type, t_pf *sup,\
 																	t_vec *buf);
@@ -68,7 +69,9 @@ void				putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf);
 
 int					buf_wchar(wchar_t c, t_vec *buf, int bytes);
 void				str_to_buf(char *s, t_vec *buf);
-t_vec				*strnbr_buf(long long n, t_vec *nbuf);
-t_vec				*strunbr_buf(unsigned long long n, t_vec *nbuf);
+t_vec				*itoa_buf(long long n, t_vec *nbuf);
+t_vec				*uitoa_buf(uintmax_t n, t_vec *nbuf);
+t_vec				*itoa_base_buf(uintmax_t num, t_vec *nbuf, t_pf *sup,\
+																	char type);
 
 #endif

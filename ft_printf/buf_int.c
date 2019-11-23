@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/23 02:30:31 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/23 19:45:15 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,63 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 		zero_padding(sup, buf, wlen, i);
 	else
 		space_padding(sup, buf, wlen, i);
+	while (i < len)
+		ft_vpush_back(buf, ft_vat(nbuf, i++), sizeof(char));
+	put_full_width(buf, sup, 'L', ' ');
+}
+
+void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
+{
+	char	*hash;
+	int		len;
+	int		wlen;
+	int		n;
+	int		i;
+
+	n = 0;
+	i = 0;
+	len = nbuf->size;
+	sup->preci -= (sup->preci > 0 && sup->preci > len) ? len : sup->preci;
+	wlen = len + sup->preci;
+	if (sup->hash == '#')
+	{
+		if (type == 'x' || type == 'X')
+		{
+			hash = (type == 'x' ? "0x" : "0X");
+			n = 2;
+		}
+		else if (type == 'o' || type == 'O')
+		{
+			hash = "0";
+			n = 1;
+		}
+		else if (type == 'p')
+		{
+			hash = "0x";
+			n = 2;
+		}
+	}
+	sup->width -= (sup->width > (size_t)wlen + n) ? wlen + n : sup->width;
+	if (sup->preci > 0)
+	{
+		put_full_width(buf, sup, 'R', ' ');
+		while (n--)
+			ft_vpush_back(buf, hash++, sizeof(char));
+		while (sup->preci--)
+			ft_vpush_back(buf, "0", sizeof(char));
+	}
+	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0)
+	{
+		while (n--)
+			ft_vpush_back(buf, hash++, sizeof(char));
+		put_full_width(buf, sup, 'R', '0');
+	}
+	else
+	{
+		while (n--)
+			ft_vpush_back(buf, hash++, sizeof(char));
+		put_full_width(buf, sup, 'R', ' ');
+	}
 	while (i < len)
 		ft_vpush_back(buf, ft_vat(nbuf, i++), sizeof(char));
 	put_full_width(buf, sup, 'L', ' ');
