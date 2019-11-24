@@ -2,7 +2,11 @@
 	"files.associations": {
 		"complex": "c",
 		"stdio.h": "c",
-		"inttypes.h": "c"
+		"inttypes.h": "c",
+		"__locale": "c",
+		"__string": "c",
+		"string_view": "c",
+		"string": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

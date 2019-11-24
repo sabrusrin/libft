@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 10:32:33 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 22:22:31 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,22 @@ int					ft_printf(const char *format, ...);
 int					ft_dprintf(int fd, const char *format, ...);
 int					parse_format(va_list ap, const char *format, t_vec *buf,\
 																	t_pf *sup);
-
 /*
 **	helper functions
 */
-
 void				set_default(t_pf *sup);
 int					ft_wildcard(va_list ap, char **str, t_pf *sup);
 void				put_width(t_vec *buf, t_pf *sup, char pos, char delim);
 void				put_full_width(t_vec *buf, t_pf *sup, char pos, char delim);
 void				do_hash(t_pf *sup, int *wlen, int *h, char type);
 void				put_precision_width(t_pf *sup, t_vec *buf, int pr, int h);
-
+int					precision_len(wchar_t *s, t_pf *sup);
+size_t				ft_lstrlen(const wchar_t *s);
+int					wchar_bytes(wint_t c);
 /*
 **	exe_(type) functions consider type size and call the function that
 **	put an argument to the ft_printf buffer.
 */
-
 void				exe_int(va_list ap, char type, t_pf *sup, t_vec *buf);
 void				exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf);
 void				exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf);

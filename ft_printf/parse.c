@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 12:34:44 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 22:24:23 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 	{
 		if (**str == 'd' || **str == 'i' || **str == 'D')
 			exe_int(ap, **str, sup, buf);
- 		else if (**str == 'o' || **str == 'O')
+		else if (**str == 'o' || **str == 'O')
 			exe_octal_hex(ap, **str, sup, buf);
 		else if (**str == 'u' || **str == 'U')
 			exe_unsigned(ap, **str, sup, buf);
- 		else if (**str == 'x' || **str == 'X' || **str == 'p')
+		else if (**str == 'x' || **str == 'X' || **str == 'p')
 			exe_octal_hex(ap, **str, sup, buf);
 /* 		else if (**str == 'f' || **str == 'F')
 			exe_double(ap, **str, sup, buf);
 		else if (**str == 'a' || **str == 'A')
 			write(1, "\nnot implemented yet ¯\\_(ツ)_/¯\n", 31); */
- 		else if (**str == 'c' || **str == 'C')
+		else if (**str == 'c' || **str == 'C')
 			exe_char_string(ap, **str, sup, buf);
 		else if (**str == 's' || **str == 'S')
 			exe_char_string(ap, **str, sup, buf);
@@ -137,7 +137,7 @@ int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 			return (FALSE);
 		if (*str != '%')
 			ft_vpush_back(buf, str, sizeof(char));
-		else if (*(++str))
+		else if (*str == '%' && *(++str))
 		{
 			if (*str && *str == '%')
 				ft_vpush_back(buf, str++, sizeof(char));

@@ -6,27 +6,12 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:08:38 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 12:10:37 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 22:07:08 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-
-void	set_default(t_pf *sup)
-{
-	sup->length = 0;
-	sup->hash = 0;
-	sup->zero = 0;
-	sup->minus = 0;
-	sup->space = 0;
-	sup->plus = 0;
-	sup->width = 0;
-	sup->sign = 0;
-	sup->preci = -1;
-	sup->hash_symb = NULL;
-	sup->kill = FALSE;
-}
 
 /* int		ft_vsnprintf(char *str, size_t size, const char *format, ...)
 {

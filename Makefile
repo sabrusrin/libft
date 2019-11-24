@@ -6,7 +6,7 @@
 #    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/11/21 21:25:23 by chermist         ###   ########.fr        #
+#    Updated: 2019/11/24 21:47:52 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,11 +116,12 @@ MY_F  = get_next_line.c
 PRINTF = ft_printf.c \
 		parse.c \
 		exe_specifier.c \
-		strnbr.c \
+		itoa_buf.c \
 		buf_char.c \
 		buf_string.c \
 		buf_int.c \
 		support.c \
+		support2.c
 
 SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) \
 		$(MY_F) $(MATH_F) $(VEC_F) $(MY_F) $(Q_F) $(PRINTF)

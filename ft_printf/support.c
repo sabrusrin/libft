@@ -6,13 +6,13 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 18:38:04 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 10:21:43 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 19:03:32 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_wildcard(va_list ap, char **str, t_pf *sup)
+int		ft_wildcard(va_list ap, char **str, t_pf *sup)
 {
 	int	arg;
 
@@ -48,7 +48,6 @@ void	put_full_width(t_vec *buf, t_pf *sup, char pos, char delim)
 	else if (sup->width >= 1 && sup->minus == '-' && pos == 'L')
 		while (sup->width)
 		{
-
 			ft_vpush_back(buf, " ", sizeof(char));
 			sup->width--;
 		}

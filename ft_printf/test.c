@@ -13,20 +13,31 @@ int	main(void)
 
 	setlocale(LC_ALL, "");
 
-	d = ft_printf("!%32.16ls!", L"(╯°□°)╯︵ ┻━┻ ");
+/* 	d = ft_printf("!%32.16ls!", L"(╯°□°)╯︵ ┻━┻ ");
 	printf("\n%d\n", d);
 	d = printf("!%32.16ls!", L"(╯°□°)╯︵ ┻━┻ ");
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("42%56.44ls42", L"こんにちは、私はprintf単体テストです");
+	d = ft_printf("%56.44ls", L"こんにちは、私はprintf単体テストです");
 	printf("\n%d\n", d);
-	d = printf("42%56.44ls42", L"こんにちは、私はprintf単体テストです");
+	d = printf("%56.44ls", L"こんにちは、私はprintf単体テストです");
 	printf("\n%d\n\n", d);
 
 	d = ft_printf("\\!/%2.2ls\\!/", L"┬─┬﻿ ノ( ゜-゜ノ)");
 	printf("\n%d\n", d);
 	d = printf("\\!/%2.2ls\\!/", L"┬─┬﻿ ノ( ゜-゜ノ)");
 	printf("\n%d\n\n", d);
+
+	d = ft_printf("!%52.3ls!", L"");
+	printf("\n%d\n", d);
+	d = printf("!%52.3ls!", L"");
+	printf("\n%d\n\n", d); */
+
+	d = ft_printf("%");
+	printf("\n%d\n", d);
+	d = printf("%");
+	printf("\n%d\n\n", d);
+
 
 /* 	d = ft_printf("|%0#15x|", -355555);
 	printf("\n%d\n", d);
