@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 10:26:13 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:34:44 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void	parse_flags(char **str, t_pf *sup)
 }
 
 /*
-**	%[parameter][flags][width][.precision][length]type
+**	%[flags][width][.precision][length]type
 */
 
 int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)

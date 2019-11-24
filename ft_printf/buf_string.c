@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 22:09:21 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 12:27:26 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:44:02 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,3 +165,9 @@ void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 		}
 	put_full_width(buf, sup, 'L', ' ');
 }
+/*
+For the ls or S type, width is specified in bytes. If the number of bytes in the
+output value is less than the specified width, single-byte blanks are added on
+the left or the right (depending on whether the - flag is specified)
+until the minimum width is reached.
+*/
