@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 23:06:47 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 00:47:37 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 09:32:50 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exe_int(va_list ap, char type, t_pf *sup, t_vec *buf)
 {
 	t_vec	*nbuf;
 
-	nbuf = ft_vnew(20, sizeof(char));
+	nbuf = ft_vnew(30, sizeof(char));
 	if ((type != 'D' && sup->length == 4) || type == 'D')
 		putnbr_buf(sup, buf, itoa_buf(va_arg(ap, long), nbuf));
 	else if (sup->length == 0)
@@ -47,7 +47,7 @@ void	exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf)
 {
 	t_vec	*nbuf;
 
-	nbuf = ft_vnew(20, sizeof(char));
+	nbuf = ft_vnew(30, sizeof(char));
 	if ((type != 'O' && sup->length == 4) || type == 'O' || type == 'p')
 		putbase_buf(sup, buf, type, \
 			itoa_base_buf(va_arg(ap, unsigned long), nbuf, sup, type));
@@ -76,7 +76,7 @@ void	exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf)
 {
 	t_vec	*nbuf;
 
-	nbuf = ft_vnew(20, sizeof(char));
+	nbuf = ft_vnew(30, sizeof(char));
 	if ((type == 'u' && sup->length == 4) || type == 'U')
 		putnbr_buf(sup, buf, uitoa_buf(va_arg(ap, unsigned long), nbuf));
 	else if (sup->length == 0)

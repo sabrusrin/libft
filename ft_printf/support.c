@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 18:38:04 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/22 20:03:04 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 10:21:43 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,47 @@ void	put_full_width(t_vec *buf, t_pf *sup, char pos, char delim)
 			ft_vpush_back(buf, " ", sizeof(char));
 			sup->width--;
 		}
+}
+
+void	do_hash(t_pf *sup, int *wlen, int *h, char type)
+{
+	if (type == 'x' || type == 'X' || type == 'p')
+	{
+		sup->hash_symb = (type != 'X' ? "0x" : "0X");
+		*h = 2;
+	}
+	else if (type == 'o' || type == 'O')
+	{
+		if (sup->preci > 0)
+		{
+			sup->preci -= 1;
+			*wlen -= 1;
+		}
+		sup->hash_symb = "0";
+		*h = 1;
+	}
+}
+
+void	put_precision_width(t_pf *sup, t_vec *buf, int pr, int h)
+{
+	if (sup->preci > 0)
+	{
+		put_full_width(buf, sup, 'R', ' ');
+		while (h--)
+			ft_vpush_back(buf, sup->hash_symb++, sizeof(char));
+		while (sup->preci--)
+			ft_vpush_back(buf, "0", sizeof(char));
+	}
+	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0 && pr == -1)
+	{
+		while (h--)
+			ft_vpush_back(buf, sup->hash_symb++, sizeof(char));
+		put_full_width(buf, sup, 'R', '0');
+	}
+	else
+	{
+		put_full_width(buf, sup, 'R', ' ');
+		while (h--)
+			ft_vpush_back(buf, sup->hash_symb++, sizeof(char));
+	}
 }

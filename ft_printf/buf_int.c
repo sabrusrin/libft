@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 00:35:39 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 10:21:33 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	zero_padding(t_pf *sup, t_vec *buf, int wlen, int i)
 {
 	if (sup->plus == '+' || i)
 		ft_vpush_back(buf, &sup->sign, sizeof(char));
-	sup->width -= ((sup->width > (size_t)wlen) ? wlen : sup->width);
+	sup->width -= ((sup->width > wlen) ? wlen : sup->width);
 	if (sup->space == ' ' && sup->sign != '-' && sup->plus != '+')
 		ft_vpush_back(buf, &sup->space, sizeof(char));
 	put_full_width(buf, sup, 'R', '0');
@@ -28,7 +28,7 @@ void	zero_padding(t_pf *sup, t_vec *buf, int wlen, int i)
 
 void	space_padding(t_pf *sup, t_vec *buf, int wlen, int i)
 {
-	sup->width -= ((sup->width > (size_t)wlen) ? wlen : sup->width);
+	sup->width -= ((sup->width > wlen) ? wlen : sup->width);
 	if (sup->space == ' ' && sup->sign != '-' &&\
 														sup->plus != '+')
 		ft_vpush_back(buf, &sup->space, sizeof(char));
@@ -51,7 +51,7 @@ void	precision_nbr(t_pf *sup, t_vec *buf, t_vec *nbuf, int len)
 		i = 1;
 	sup->preci -= !i || (!i && sup->plus == '+') ? nbuf->size : nbuf->size - 1;
 	len += sup->preci;
-	sup->width -= ((sup->width > (size_t)len) ? len : sup->width);
+	sup->width -= ((sup->width > len) ? len : sup->width);
 	if (sup->space == ' ' && sup->sign != '-' && sup->plus != '+')
 		ft_vpush_back(buf, &sup->space, sizeof(char));
 	put_full_width(buf, sup, 'R', ' ');
@@ -96,56 +96,22 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 
 void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
 {
-	char	*hash;
 	int		len;
 	int		wlen;
-	int		n;
+	int		h;
 	int		i;
-	int		preci;
+	int		pr;
 
-	n = 0;
-	i = 0;
-	hash = NULL;
 	len = nbuf->size;
-	preci = sup->preci;
+	h = 0;
+	i = 0;
+	pr = sup->preci;
 	sup->preci -= (sup->preci > 0 && sup->preci > len) ? len : sup->preci;
 	wlen = len + sup->preci;
-	if (sup->hash == '#' && (type == 'x' || type == 'X' || type == 'p'))
-	{
-		hash = (type != 'X' ? "0x" : "0X");
-		n = 2;
-	}
-	else if (sup->hash == '#' && (type == 'o' || type == 'O'))
-	{
-		if (sup->preci > 0)
-		{
-			sup->preci -= 1;
-			wlen -= 1;
-		}
-		hash = "0";
-		n = 1;
-	}
-	sup->width -= (sup->width > (size_t)wlen + n) ? wlen + n : sup->width;
-	if (sup->preci > 0)
-	{
-		put_full_width(buf, sup, 'R', ' ');
-		while (n--)
-			ft_vpush_back(buf, hash++, sizeof(char));
-		while (sup->preci--)
-			ft_vpush_back(buf, "0", sizeof(char));
-	}
-	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0 && preci == -1)
-	{
-		while (n--)
-			ft_vpush_back(buf, hash++, sizeof(char));
-		put_full_width(buf, sup, 'R', '0');
-	}
-	else
-	{
-		put_full_width(buf, sup, 'R', ' ');
-		while (n--)
-			ft_vpush_back(buf, hash++, sizeof(char));
-	}
+	if (sup->hash == '#')
+		do_hash(sup, &wlen, &h, type);
+	sup->width -= (sup->width > wlen + h) ? wlen + h : sup->width;
+	put_precision_width(sup, buf, pr, h);
 	while (i < len)
 		ft_vpush_back(buf, ft_vat(nbuf, i++), sizeof(char));
 	put_full_width(buf, sup, 'L', ' ');

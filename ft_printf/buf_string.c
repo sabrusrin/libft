@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 22:09:21 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 01:25:37 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:27:26 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,14 @@ size_t	ft_lstrlen(const wchar_t *s)
 
 void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 {
-	size_t	len;
+	int	len;
 
 	(!s ? (s = "(null)") : 0);
 	len = ft_strlen(s);
 	type = 0;
 	if (sup->preci >= 0)
 	{
-		sup->preci = ((size_t)sup->preci > len) ? len : sup->preci;
+		sup->preci = (sup->preci > len) ? len : sup->preci;
 		len = sup->preci;
 	}
 	sup->width -= ((sup->width > len) ? len : sup->width);
@@ -86,12 +86,14 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 **				puts spaces to the ft_printf buffer to fill out the field width.
 */
 
-/* size_t	check_wlen(wchar_t *s, t_pf *sup)
+/*int	check_wlen(wchar_t *s, t_pf *sup)
 {
 	int	tmp;
 	int	printable;
 	int	count;
+	int	i;
 
+	i = 0;
 	tmp = sup->preci;
 	printable = 0;
 	while (tmp > 0)
@@ -101,10 +103,12 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 		{
 			printable += count;
 			tmp -= count;
+			i++;
 		}
 		else
 		{
 			printable += (tmp > count ? count : tmp);
+			i += (tmp > count ? 1 : 0);
 			tmp -= (tmp > count ? count : tmp);
 		}
 		s++;
@@ -116,18 +120,18 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 	ft_putchar('|');
 	ft_putchar('\n');
 	return (printable);
-} */
-
+	return (i);
+}*/
 void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 {
-	size_t	len;
+	int	len;
 
 	(!s ? (s = L"(null)") : 0);
 	len = ft_lstrlen(s);
-/*  	ft_putchar('|');
+ /* 	ft_putchar('|');
 	ft_putnbr(len);
 	ft_putchar('\n'); */
-	if (type == 's' && sup->preci != -1 && (size_t)sup->preci < len)
+	if (type == 's' && sup->preci != -1 && sup->preci < len)
 		len = sup->preci;
 	else
 		sup->preci = -1;
@@ -150,13 +154,13 @@ void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 				sup->preci -= buf_wchar(*s, buf, 0);
 			else
 			{
-//				write(1, "%", 1);
+				//write(1, "%", 1);
 				sup->preci -= buf_wchar(*s, buf,\
 				(sup->preci > wchar_bytes(*s) ? wchar_bytes(*s) : sup->preci));
-/* 	ft_putchar('|');
+ /* 	ft_putchar('|');
 	ft_putnbr(wchar_bytes(*s));
-
- */			}
+ */
+			}
 			s++;
 		}
 	put_full_width(buf, sup, 'L', ' ');

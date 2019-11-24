@@ -6,11 +6,12 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:08:38 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/23 18:38:59 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:10:37 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 void	set_default(t_pf *sup)
 {
@@ -23,10 +24,34 @@ void	set_default(t_pf *sup)
 	sup->width = 0;
 	sup->sign = 0;
 	sup->preci = -1;
+	sup->hash_symb = NULL;
 	sup->kill = FALSE;
 }
 
-int		ft_fdprintf(int fd, const char *format, ...)
+/* int		ft_vsnprintf(char *str, size_t size, const char *format, ...)
+{
+	va_list	ap;
+	t_vec	*buf;
+	t_pf	sup;
+	int		sz;
+
+	sz = 0;
+	if ((buf = ft_vnew(size, sizeof(char))))
+	{
+		va_start(ap, format);
+		set_default(&sup);
+		if (parse_format(ap, format, buf, &sup))
+			sz = buf->size;
+		else
+			sz = -1;
+		write(fd, buf->data, buf->size);
+		ft_vdel(&buf);
+		va_end(ap);
+	}
+	return (sz);
+} */
+
+int		ft_dprintf(int fd, const char *format, ...)
 {
 	va_list	ap;
 	t_vec	*buf;
