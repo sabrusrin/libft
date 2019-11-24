@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 18:38:04 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 19:03:32 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/25 00:26:52 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	put_precision_width(t_pf *sup, t_vec *buf, int pr, int h)
 		while (sup->preci--)
 			ft_vpush_back(buf, "0", sizeof(char));
 	}
-	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0 && pr == -1)
+	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0 && pr < 0)
 	{
 		while (h--)
 			ft_vpush_back(buf, sup->hash_symb++, sizeof(char));

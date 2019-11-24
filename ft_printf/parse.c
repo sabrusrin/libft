@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 22:24:23 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/25 00:21:32 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 {
-	if (str && *str)
+	if (str && *str && TYPE(**str))
 	{
 		if (**str == 'd' || **str == 'i' || **str == 'D')
 			exe_int(ap, **str, sup, buf);
@@ -48,7 +48,7 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 
 void	parse_length_field(char **str, t_pf *sup)
 {
-	if (str && *str)
+	if (str && *str && LENGTH(**str))
 	{
 		if (**str == 'h' && *(*str + 1) == 'h' && (*str += 2))
 			sup->length = 1;
@@ -91,6 +91,11 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 			else
 				sup->preci = ft_wildcard(ap, str, sup);
 		}
+		else if (**str == '.')
+		{
+			++*str;
+			sup->preci = -2;
+		}
 	}
 }
 
@@ -98,13 +103,15 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 **	parses flags field; flags	#0- +
 */
 
-void	parse_flags(char **str, t_pf *sup)
+void	parse_flags(char **str, t_pf *sup, t_vec *buf)
 {
 	set_default(sup);
 	if (str && *str)
 		while (**str && ft_strchr(FLAG, **str))
 		{
-			if (**str == '#')
+			if (**str == '%')
+				ft_vpush_back(buf, "%", sizeof(char));
+			else if (**str == '#')
 				sup->hash = '#';
 			else if (**str == '0')
 				sup->zero = '0';
@@ -137,13 +144,14 @@ int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 			return (FALSE);
 		if (*str != '%')
 			ft_vpush_back(buf, str, sizeof(char));
-		else if (*str == '%' && *(++str))
+		else if (*(str + 1))
 		{
-			if (*str && *str == '%')
+			++str;
+			if (*str == '%')
 				ft_vpush_back(buf, str++, sizeof(char));
 			else if (*str)
 			{
-				parse_flags(&str, sup);
+				parse_flags(&str, sup, buf);
 				parse_width_preci(ap, &str, sup);
 				parse_length_field(&str, sup);
 				parse_type(ap, &str, sup, buf);

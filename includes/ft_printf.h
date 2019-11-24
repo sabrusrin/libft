@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 22:22:31 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 23:57:46 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # include <stddef.h>
 # include <wchar.h>
 # include "libft.h"
-# define LENGTH "lLhjz"
-# define TYPE "dDioOuUxXfFeEcCsSpaAgGpb"
-# define FLAG "#0- +'"
+# define FLAG "#0- +' %"
+# define TYPE(x) (ft_strchr("dDioOuUxXfFeEcCsSpaAgGpb", x))
+# define LENGTH(x) (ft_strchr("lLhjzt", x))
 
 # define TRUE 1
 # define FALSE 0
