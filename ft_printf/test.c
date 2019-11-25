@@ -33,9 +33,9 @@ int	main(void)
 	d = printf("!%52.3ls!", L"");
 	printf("\n%d\n\n", d); */
 
-	d = ft_printf("%4.s", "42");
+	d = ft_printf("%#.o, %#.0o", 0, 0);
 	printf("\n%d\n", d);
-	d = printf("%4.s", "42");
+	d = printf("%#.o, %#.0o", 0, 0);
 	printf("\n%d\n\n", d);
 
 
