@@ -1,5 +1,6 @@
 # libft
-Ecole42 project. Reimplementation of some C standard library functions.
+Ecole42 project.  
+Reimplementation of some C standard library functions.
 #### my 42 nickname - chermist
 
 Use make to build libft.
