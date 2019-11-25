@@ -6,14 +6,12 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:50:26 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/16 22:59:46 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 19:11:28 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VECTOR_H
 # define VECTOR_H
-
-# include "libft.h"
 
 /*
 **A structure to represent a vector

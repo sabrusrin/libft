@@ -6,11 +6,11 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 17:52:24 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 16:40:07 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:10:52 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_printf.h"
+#include "libft.h"
 
 int		check_bytes(wint_t c, t_pf *sup)
 {
@@ -28,12 +28,12 @@ int		check_bytes(wint_t c, t_pf *sup)
 	return (-1);
 }
 
-int		buf_more_bytes_wchar(wchar_t c, t_vec *buf)
+int		buf_more_bytes_wchar(wchar_t c, t_vec *buf, int bytes)
 {
 	wchar_t a;
 
 	a = 0;
-	if (c < 65536)
+	if (c < 65536 && (bytes == 0 || bytes == 3))
 	{
 		a = ((c >> 12) | 0xE0);
 		ft_vpush_back(buf, &a, sizeof(char));
@@ -43,7 +43,7 @@ int		buf_more_bytes_wchar(wchar_t c, t_vec *buf)
 		ft_vpush_back(buf, &a, sizeof(char));
 		return (3);
 	}
-	else if (c < 2097152)
+	else if (c < 2097152 && (bytes == 0 || bytes == 4))
 	{
 		a = ((c >> 18) | 0xF0);
 		ft_vpush_back(buf, &a, sizeof(char));
@@ -57,17 +57,17 @@ int		buf_more_bytes_wchar(wchar_t c, t_vec *buf)
 	return ((c < 2097152) ? 4 : -1);
 }
 
-int		buf_wchar(wchar_t c, t_vec *buf)
+int		buf_wchar(wchar_t c, t_vec *buf, int bytes)
 {
 	wchar_t a;
 
 	a = 0;
-	if (c <= 127)
+	if (c <= 127 && (bytes == 0 || bytes == 1))
 	{
 		ft_vpush_back(buf, &c, sizeof(char));
 		return (1);
 	}
-	else if (c < 2048)
+	else if (c < 2048 && (bytes == 0 || bytes == 2))
 	{
 		a = ((c >> 6) | 0xC0);
 		ft_vpush_back(buf, &a, sizeof(char));
@@ -75,7 +75,7 @@ int		buf_wchar(wchar_t c, t_vec *buf)
 		ft_vpush_back(buf, &a, sizeof(char));
 		return (2);
 	}
-	return (buf_more_bytes_wchar(c, buf));
+	return (buf_more_bytes_wchar(c, buf, bytes));
 }
 
 /*
@@ -99,6 +99,6 @@ void	putchar_buf(wchar_t c, char type, t_pf *sup, t_vec *buf)
 	if (type == 'c' && sup->length == 0)
 		ft_vpush_back(buf, &a, sizeof(char));
 	else if ((type == 'c' && sup->length == 4) || (type == 'C' && !sup->length))
-		buf_wchar(b, buf);
+		buf_wchar(b, buf, 0);
 	put_width(buf, sup, 'L', ' ');
 }

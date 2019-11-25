@@ -6,11 +6,11 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/19 16:50:29 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/20 16:58:17 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 19:14:52 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vector.h"
+#include "libft.h"
 
 t_vec	*ft_vdup(t_vec *vsrc)
 {

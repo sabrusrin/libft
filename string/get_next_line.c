@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/17 16:29:09 by chermist          #+#    #+#             */
-/*   Updated: 2019/09/11 15:46:08 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 23:38:24 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "libft.h"
 
 t_line	*check_fd(t_line *curr_l, int fd)
 {

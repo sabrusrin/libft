@@ -6,37 +6,11 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 22:09:21 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 16:39:47 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/25 00:37:52 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_printf.h"
-
-void	str_to_buf(char *s, t_vec *buf)
-{
-	while (*s)
-		ft_vpush_back(buf, s++, sizeof(char));
-}
-
-size_t	ft_lstrlen(const wchar_t *s)
-{
-	size_t count;
-
-	count = 0;
-	while (*s)
-	{
-		if (*s <= 127)
-			count += 1;
-		else if (*s < 2048)
-			count += 2;
-		else if (*s < 65536)
-			count += 3;
-		else if (*s < 2097152)
-			count += 4;
-		s++;
-	}
-	return (count);
-}
+#include "libft.h"
 
 /*
 **	putstr_buf - puts char string to the ft_printf buffer;
@@ -45,26 +19,27 @@ size_t	ft_lstrlen(const wchar_t *s)
 
 void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 {
-	size_t	len;
+	int	len;
 
 	(!s ? (s = "(null)") : 0);
-	len = ft_strlen(s);
+	len = (sup->preci == 0 || sup->preci == -2) ? 0 : ft_strlen(s);
+	type = 0;
 	if (sup->preci >= 0)
 	{
 		sup->preci = (sup->preci > len) ? len : sup->preci;
 		len = sup->preci;
 	}
-	sup->width = sup->width - ((sup->width > len) ? (len - 1) : sup->width);
-	put_width(buf, sup, 'R', ' ');
-	if (sup->preci < 0)
+	sup->width -= ((sup->width > len) ? len : sup->width);
+	put_full_width(buf, sup, 'R', ' ');
+	if (sup->preci < 0 && sup->preci != -2)
 		str_to_buf(s, buf);
-	else
+	else if (sup->preci != 0 && sup->preci != -2)
 		while (sup->preci)
 		{
 			ft_vpush_back(buf, s++, sizeof(char));
 			sup->preci--;
 		}
-	put_width(buf, sup, 'L', ' ');
+	put_full_width(buf, sup, 'L', ' ');
 }
 
 /*
@@ -74,13 +49,33 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 
 void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 {
-	size_t	len;
+	int	len;
+	int	bytes;
 
+	bytes = 0;
 	(!s ? (s = L"(null)") : 0);
-	len = ft_lstrlen(s);
-	sup->width = sup->width - ((sup->width > len) ? (len - 1) : sup->width);
-	put_width(buf, sup, 'R', ' ');
-	while (*s)
-		buf_wchar(*(s++), buf);
-	put_width(buf, sup, 'L', ' ');
+	len = (sup->preci == 0 || sup->preci == -2) ? 0 : ft_lstrlen(s);
+	if (type == 's' && sup->preci != -1 && sup->preci < len)
+		len = precision_len(s, sup);
+	else
+		sup->preci = -1;
+	sup->width -= (sup->width > len) ? len : sup->width;
+	put_full_width(buf, sup, 'R', ' ');
+	if (sup->preci < 0)
+		while (*s)
+			buf_wchar(*(s++), buf, 0);
+	else
+		while (sup->preci > 0)
+		{
+			if (sup->preci > 4)
+				sup->preci -= buf_wchar(*s, buf, 0);
+			else
+			{
+				bytes = wchar_bytes(*s);
+				sup->preci -= buf_wchar(*s, buf,\
+				(sup->preci > bytes ? bytes : sup->preci));
+			}
+			s++;
+		}
+	put_full_width(buf, sup, 'L', ' ');
 }

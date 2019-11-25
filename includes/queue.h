@@ -6,14 +6,12 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 22:48:19 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/16 21:58:47 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 19:11:52 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef QUEUE_H
 # define QUEUE_H
-
-# include "libft.h"
 
 /*
 **A structure to represent a queue

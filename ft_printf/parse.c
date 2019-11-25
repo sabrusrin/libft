@@ -6,11 +6,11 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/19 21:44:27 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/25 00:21:32 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "f_printf.h"
+#include "libft.h"
 
 /*
 **	parses the type field
@@ -18,7 +18,7 @@
 
 void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 {
-	if (str && *str)
+	if (str && *str && TYPE(**str))
 	{
 		if (**str == 'd' || **str == 'i' || **str == 'D')
 			exe_int(ap, **str, sup, buf);
@@ -28,10 +28,10 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 			exe_unsigned(ap, **str, sup, buf);
 		else if (**str == 'x' || **str == 'X' || **str == 'p')
 			exe_octal_hex(ap, **str, sup, buf);
-		else if (**str == 'f' || **str == 'F')
+/* 		else if (**str == 'f' || **str == 'F')
 			exe_double(ap, **str, sup, buf);
 		else if (**str == 'a' || **str == 'A')
-			write(1, "\nnot implemented yet ¯\\_(ツ)_/¯\n", 31);
+			write(1, "\nnot implemented yet ¯\\_(ツ)_/¯\n", 31); */
 		else if (**str == 'c' || **str == 'C')
 			exe_char_string(ap, **str, sup, buf);
 		else if (**str == 's' || **str == 'S')
@@ -48,16 +48,16 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 
 void	parse_length_field(char **str, t_pf *sup)
 {
-	if (str && *str)
+	if (str && *str && LENGTH(**str))
 	{
 		if (**str == 'h' && *(*str + 1) == 'h' && (*str += 2))
 			sup->length = 1;
+		else if (**str == 'l' && *(*str + 1) == 'l' && (*str += 2))
+			sup->length = 8;
 		else if (**str == 'h' && ++(*str))
 			sup->length = 2;
 		else if (**str == 'l' && ++(*str))
 			sup->length = 4;
-		else if (**str == 'l' && *(*str + 1) == 'l' && (*str += 2))
-			sup->length = 8;
 		else if (**str == 'L' && ++(*str))
 			sup->length = 16;
 		else if (**str == 'z' && ++(*str))
@@ -91,6 +91,11 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 			else
 				sup->preci = ft_wildcard(ap, str, sup);
 		}
+		else if (**str == '.')
+		{
+			++*str;
+			sup->preci = -2;
+		}
 	}
 }
 
@@ -98,13 +103,15 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 **	parses flags field; flags	#0- +
 */
 
-void	parse_flags(char **str, t_pf *sup)
+void	parse_flags(char **str, t_pf *sup, t_vec *buf)
 {
 	set_default(sup);
 	if (str && *str)
 		while (**str && ft_strchr(FLAG, **str))
 		{
-			if (**str == '#')
+			if (**str == '%')
+				ft_vpush_back(buf, "%", sizeof(char));
+			else if (**str == '#')
 				sup->hash = '#';
 			else if (**str == '0')
 				sup->zero = '0';
@@ -123,7 +130,7 @@ void	parse_flags(char **str, t_pf *sup)
 }
 
 /*
-**	%[parameter][flags][width][.precision][length]type
+**	%[flags][width][.precision][length]type
 */
 
 int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
@@ -137,13 +144,14 @@ int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 			return (FALSE);
 		if (*str != '%')
 			ft_vpush_back(buf, str, sizeof(char));
-		else if (*(++str))
+		else if (*(str + 1))
 		{
-			if (*str && *str == '%')
+			++str;
+			if (*str == '%')
 				ft_vpush_back(buf, str++, sizeof(char));
 			else if (*str)
 			{
-				parse_flags(&str, sup);
+				parse_flags(&str, sup, buf);
 				parse_width_preci(ap, &str, sup);
 				parse_length_field(&str, sup);
 				parse_type(ap, &str, sup, buf);

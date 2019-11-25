@@ -6,11 +6,11 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 23:15:08 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/16 20:17:01 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 19:17:48 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "queue.h"
+#include "libft.h"
 
 void	*ft_qpop(t_q *queue)
 {

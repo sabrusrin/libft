@@ -3,62 +3,101 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chermist <chermist@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 19:16:57 by lkarlon-          #+#    #+#             */
-/*   Updated: 2019/10/11 00:21:36 by chermist         ###   ########.fr       */
+/*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
+/*   Updated: 2019/11/24 23:57:46 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
+# include <stddef.h>
+# include <wchar.h>
 # include "libft.h"
+# define FLAG "#0- +' %"
+# define TYPE(x) (ft_strchr("dDioOuUxXfFeEcCsSpaAgGpb", x))
+# define LENGTH(x) (ft_strchr("lLhjzt", x))
 
-# define SPCFR(x) (ft_strchr("dDioOuUxXfFeEcCsSpaAgGpb", x))
-# define FLAGS(x) (ft_strchr("-+ #0", x))
-# define MDFR(x) (ft_strchr("lLhjz", x) != NULL)
-# define ALLSHT(x) (ft_strchr("dDioOuUxXfFeEcCsSpaAgGpb-+ #0lLhjz.%", x))
-# define ALLMDFR(x) (ft_strchr("-+ #0lLhjz.*0123456789", x))
+# define TRUE 1
+# define FALSE 0
 
-typedef struct	s_mdfrs
+typedef struct		s_pf
 {
-	char		*pbuffer;
-	char		flag[7];
-	int			modifier;
-	int			width;
-	int			pr;
-	char		spec;
-	int			c_num;
-}				t_mdfrs;
+	unsigned char	length;
+	char			hash;
+	char			zero;
+	char			minus;
+	char			space;
+	char			plus;
+	char			sign;
+	int				width;
+	int				preci;
+	char			*hash_symb;
+	int				kill;
+}					t_pf;
 
-int				ft_printf(const char *format, ...);
-size_t			parse(const char *format, va_list ap);
-size_t			spec_exe(char *spec, va_list ap, t_mdfrs *mods);
-void			pf_putchar(int c, t_mdfrs *m);
-void			pf_putstr(char	*s, t_mdfrs *m);
-void			pf_putnbr(long long n, t_mdfrs *m);
-void			u_pf_putnbr(unsigned long long n, t_mdfrs *m);
-void			pf_putdbl(long double d, t_mdfrs *m);
-void			pf_base(uintmax_t num, t_mdfrs *m);
-void			pf_base(uintmax_t num, t_mdfrs *m);
-void			do_width(t_mdfrs *m, char f);
-void			do_hash(t_mdfrs *m, int f);
-void			do_preci(t_mdfrs *m, long double dpart, char c);
-void			nbr_preci(t_mdfrs *m, long long *n, char *sign);
-void			nbr_sign(t_mdfrs *m, char *sign, long long *n, char *p);
-void			type_parse(va_list ap, t_mdfrs *m, char flag);
-void			clean_mods(t_mdfrs *m);
-int				count_num(long long i);
-void			x_type_parse(va_list ap, t_mdfrs *m);
-void			u_type_parse(va_list ap, t_mdfrs *m);
-void			d_type_parse(va_list ap, t_mdfrs *m);
-void			u_ft_putnbr(unsigned long long n);
-int				u_count_num(unsigned long long i);
-int				more_bytes_putchar(int c);
-void			l_pf_putstr(int *s, t_mdfrs *m);
-int				count_utf_bytes(int c);
+/*
+**	ft_printf - produces output according to a format;
+**	Write output to stdout.
+*/
+int					ft_printf(const char *format, ...);
+/*
+**	ft_dprintf - produces output according to a format;
+**	Write output to the given file descriptor.
+*/
+int					ft_dprintf(int fd, const char *format, ...);
+int					parse_format(va_list ap, const char *format, t_vec *buf,\
+																	t_pf *sup);
+/*
+**	helper functions
+*/
+void				set_default(t_pf *sup);
+int					ft_wildcard(va_list ap, char **str, t_pf *sup);
+void				put_width(t_vec *buf, t_pf *sup, char pos, char delim);
+void				put_full_width(t_vec *buf, t_pf *sup, char pos, char delim);
+void				do_hash(t_pf *sup, int *wlen, int *h, char type);
+void				put_precision_width(t_pf *sup, t_vec *buf, int pr, int h);
+int					precision_len(wchar_t *s, t_pf *sup);
+size_t				ft_lstrlen(const wchar_t *s);
+int					wchar_bytes(wint_t c);
+/*
+**	exe_(type) functions consider type size and call the function that
+**	put an argument to the ft_printf buffer.
+*/
+void				exe_int(va_list ap, char type, t_pf *sup, t_vec *buf);
+void				exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf);
+void				exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf);
+void				exe_char_string(va_list ap, char type, t_pf *sup,\
+																	t_vec *buf);
+void				exe_double(va_list ap, char type, t_pf *sup, t_vec *buf);
+
+void				putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf);
+void				putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf);
+/*void				putunbr_buf(unsigned long long num, t_pf *sup, t_vec *buf);
+void				putbase_buf(uintmax_t num, char type, t_pf *sup,\
+																	t_vec *buf);
+void				putfloat_buf(float num, char type, t_pf *sup, t_vec *buf);
+void				butdouble_buf(long double num, char type, t_pf *sup,\
+																	t_vec *buf); */
+void				putchar_buf(wchar_t c, char type, t_pf *sup, t_vec *buf);
+void				putstr_buf(char *s, char type, t_pf *sup, t_vec *buf);
+void				putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf);
+
+int					buf_wchar(wchar_t c, t_vec *buf, int bytes);
+void				str_to_buf(char *s, t_vec *buf);
+
+/*
+**	itoa_buf - converts number to ASCII and puts it to num buffer
+*/
+
+t_vec				*itoa_buf(long long n, t_vec *nbuf);
+t_vec				*uitoa_buf(uintmax_t n, t_vec *nbuf);
+t_vec				*itoa_base_buf(uintmax_t num, t_vec *nbuf, t_pf *sup,\
+																	char type);
 
 #endif

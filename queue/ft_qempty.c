@@ -6,11 +6,11 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/18 23:19:07 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/16 20:15:47 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/21 19:17:09 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "queue.h"
+#include "libft.h"
 
 int	ft_qempty(t_q *queue)
 {

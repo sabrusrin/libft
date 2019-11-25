@@ -6,11 +6,11 @@
 #    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/11/18 17:32:27 by chermist         ###   ########.fr        #
+#    Updated: 2019/11/26 00:28:06 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = libftprintf.a
 
 MEM_F = ft_memset.c \
 		ft_bzero.c \
@@ -50,7 +50,8 @@ STR_F = ft_strlen.c \
 		ft_strjoin.c \
 		ft_strtrim.c \
 		ft_strsplit.c \
-		ft_wcount.c
+		ft_wcount.c \
+		get_next_line.c
 
 CHR_F = ft_atoi.c \
 		ft_atoi_move.c \
@@ -111,16 +112,15 @@ Q_F   = ft_qnew.c \
 		ft_qclear.c \
 		ft_qdel.c
 
-MY_F  = get_next_line.c
-
 PRINTF = ft_printf.c \
-		ft.c \
-		arg_exe.c \
-		assist.c \
-		flags_exe.c \
 		parse.c \
-		printf_cs.c \
-		printf_dfox.c
+		exe_specifier.c \
+		itoa_buf.c \
+		buf_char.c \
+		buf_string.c \
+		buf_int.c \
+		support.c \
+		support2.c
 
 SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) \
 		$(MY_F) $(MATH_F) $(VEC_F) $(MY_F) $(Q_F) $(PRINTF)
@@ -135,12 +135,10 @@ vpath %.c char
 vpath %.c print
 vpath %.c utils
 vpath %.c lst
-vpath %.c myfunc
 vpath %.c math
 vpath %.c vector
 vpath %.c queue
 vpath %.c ft_printf
-vpath %.c ft_printf/support
 
 FLAGS = -Wall -Wextra -Werror
 
