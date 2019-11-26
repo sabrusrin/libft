@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strnbr.c                                           :+:      :+:    :+:   */
+/*   itoa_buf.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 18:31:37 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 00:21:01 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/26 23:11:26 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_vec	*itoa_base_buf(uintmax_t num, t_vec *nbuf, t_pf *sup, char type)
 		base = 16;
 	if (type == 'p')
 		sup->hash = '#';
-	if (type != 'p' && sup->hash == '#' && num == 0)
+	if (type != 'p' && sup->hash == '#' && !num)
 		sup->hash = 0;
 	if (num == 0)
 		*--fill = base_chars[num];

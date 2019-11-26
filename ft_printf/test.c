@@ -38,6 +38,21 @@ int	main(void)
 	d = printf("%#.o, %#.0o", 0, 0);
 	printf("\n%d\n\n", d);
 
+	d = ft_printf("%#o, %#o", 0, 0);
+	printf("\n%d\n", d);
+	d = printf("%#o, %#o", 0, 0);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("%#.o", 42);
+	printf("\n%d\n", d);
+	d = printf("%#.o", 42);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("%.o, %.0o", 0, 0);
+	printf("\n%d\n", d);
+	d = printf("%.o, %.0o", 0, 0);
+	printf("\n%d\n\n", d);
+
 
 /* 	d = ft_printf("|%0#15x|", -355555);
 	printf("\n%d\n", d);

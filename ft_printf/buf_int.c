@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/25 00:31:11 by chermist         ###   ########.fr       */
+/*   Updated: 2019/11/26 23:19:47 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
 	i = 0;
 	pr = sup->preci;
 	len = (sup->preci == 0 || sup->preci == -2) ? 0 : nbuf->size;
+//	if ((type == 'o' || type == 'O') && sup->hash == '#' && (sup->preci == 0 || sup->preci == -2))
 	sup->preci -= (sup->preci > 0 && sup->preci > len) ? len : sup->preci;
 	wlen = len + sup->preci;
 	if (sup->hash == '#')
