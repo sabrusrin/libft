@@ -1,7 +1,8 @@
 # libft
+#### my 42 nickname - chermist
+> Code written in norminette code style(github.com/sabrusrin/norme)
 Ecole42 project.  
 Reimplementation of some C standard library functions.
-#### my 42 nickname - chermist
 
 Use make to build libft.
 
