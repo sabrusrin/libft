@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/25 00:21:32 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 00:40:23 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 {
-	if (str && *str && TYPE(**str))
+	if (str && *str && IS_TYPE(**str))
 	{
 		if (**str == 'd' || **str == 'i' || **str == 'D')
 			exe_int(ap, **str, sup, buf);
@@ -48,7 +48,7 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 
 void	parse_length_field(char **str, t_pf *sup)
 {
-	if (str && *str && LENGTH(**str))
+	if (str && *str && IS_LENGTH(**str))
 	{
 		if (**str == 'h' && *(*str + 1) == 'h' && (*str += 2))
 			sup->length = 1;
@@ -79,23 +79,25 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 	{
 		if (**str && (ft_isdigit(**str) || **str == '*'))
 		{
-			if (**str != '*')
+			if (**str == '*')
+				sup->wild = ft_wildcard(ap, str, sup);
+			if (ft_isdigit(**str))
 				sup->width = ft_atoi_move(str);
 			else
-				sup->width = ft_wildcard(ap, str, sup);
+				sup->width = sup->wild;
 		}
 		if (**str == '.' && (ft_isdigit(*(*str + 1)) || *(*str + 1) == '*'))
 		{
 			if (*(++(*str)) != '*')
 				sup->preci = ft_atoi_move(str);
 			else
-				sup->preci = ft_wildcard(ap, str, sup);
+			{
+				sup->wild = ft_wildcard(ap, str, sup);
+				sup->preci = sup->wild;
+			}
 		}
-		else if (**str == '.')
-		{
-			++*str;
+		else if (**str == '.' && ++*str)
 			sup->preci = -2;
-		}
 	}
 }
 
@@ -107,7 +109,7 @@ void	parse_flags(char **str, t_pf *sup, t_vec *buf)
 {
 	set_default(sup);
 	if (str && *str)
-		while (**str && ft_strchr(FLAG, **str))
+		while (**str && IS_FLAG(**str))
 		{
 			if (**str == '%')
 				ft_vpush_back(buf, "%", sizeof(char));

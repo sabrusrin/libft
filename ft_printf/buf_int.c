@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/26 23:19:47 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 00:37:24 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,14 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 
 	i = 0;
 	sup->sign = (*(char*)ft_vat(nbuf, 0) != '-') ? '+' : '-';
-	len = (sup->preci == 0 || sup->preci == -2) ? 0 : nbuf->size;
+	len = ((sup->preci == 0 || sup->preci == -2) && sup->wild) ? 0 : nbuf->size;
 	if (*(char*)ft_vat(nbuf, 0) == '-')
 		i = 1;
 	wlen = len + ((!i && (sup->plus == '+' || sup->space == ' ')) ? 1 : 0);
 	if (sup->preci > len || (i && sup->preci > (len - 1)))
 		precision_nbr(sup, buf, nbuf, wlen);
-	else if (sup->zero == '0' && sup->minus != '-' && sup->preci == -1)
+	else if (sup->zero == '0' && sup->minus != '-' && sup->preci < 0 &&\
+														sup->preci != -2)
 		zero_padding(sup, buf, wlen, i);
 	else
 		space_padding(sup, buf, wlen, i);

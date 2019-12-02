@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 21:46:01 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 21:49:21 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/02 22:24:07 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	set_default(t_pf *sup)
 	sup->width = 0;
 	sup->sign = 0;
 	sup->preci = -1;
+	sup->wild = 1;
 	sup->hash_symb = NULL;
 	sup->kill = FALSE;
 }
