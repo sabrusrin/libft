@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 21:46:12 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 23:16:17 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,12 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 	int	i;
 
 	i = 0;
-	sup->sign = (*(char*)ft_vat(nbuf, 0) != '-') ? '+' : '-';
 	len = ((sup->preci == 0 || sup->preci == -2) && sup->wild) ? 0 : nbuf->size;
 	if (*(char*)ft_vat(nbuf, 0) == '-')
+	{
+		sup->sign = '-';
 		i = 1;
+	}
 	wlen = len + ((!i && (sup->flags & PLUS || sup->flags & SPACE)) ? 1 : 0);
 	if (sup->preci > len || (i && sup->preci > (len - 1)))
 		precision_nbr(sup, buf, nbuf, wlen);

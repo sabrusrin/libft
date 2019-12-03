@@ -33,10 +33,22 @@ int	main(void)
 	d = printf("!%52.3ls!", L"");
 	printf("\n%d\n\n", d); */
 
-	d = ft_printf("|% -61.54zd|", 0);
+	d = ft_printf("%ll#x", 9223372036854775807);
 	printf("\n%d\n", d);
-	d = printf("|% -61.54zd|", 0);
+	d = printf("%ll#x", 9223372036854775807);
 	printf("\n%d\n\n", d);
+
+	d = ft_printf("%05c", 42);
+	printf("\n%d\n", d);
+	d = printf("%05c", 42);
+	printf("\n%d\n\n", d);
+
+	d = ft_printf("{% %}");
+	printf("\n%d\n", d);
+	d = printf("{% %}");
+	printf("\n%d\n\n", d);
+
+
 /*
 	d = ft_printf("%#.o, %#.0o", 0, 0);
 	printf("\n%d\n", d);

@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 21:37:30 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 00:08:49 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <wchar.h>
 # include "libft.h"
 
-# define IS_FLAG(x) (ft_strchr("#0- +' %", x))
-# define IS_TYPE(x) (ft_strchr("dDioOuUxXfFeEcCsSpaAgGpb", x))
-# define IS_LENGTH(x) (ft_strchr("lLhjzt", x))
+# define IS_FLAG(x) (ft_memchr("#0- +'", x, 6))
+# define IS_TYPE(x) (ft_memchr("dDioOuUxXfFeEcCsSpaAgGpb%", x, 25))
+# define IS_LENGTH(x) (ft_memchr("lLhjzt", x, 6))
 
 # define TRUE 1
 # define FALSE 0
@@ -39,6 +39,7 @@ typedef struct		s_pf
 {
 	char			flags;
 	unsigned char	length;
+	char			pad_char;
 	char			sign;
 	int				width;
 	int				preci;
@@ -57,8 +58,45 @@ int					ft_printf(const char *format, ...);
 **	Write output to the given file descriptor.
 */
 int					ft_dprintf(int fd, const char *format, ...);
+/*
+**	parse_format - parses ft_printf format string
+*/
 int					parse_format(va_list ap, const char *format, t_vec *buf,\
 																	t_pf *sup);
+/*
+**	exe_(type) functions consider type size and call the function that
+**	put an argument to the ft_printf buffer.
+*/
+void				exe_int(va_list ap, char type, t_pf *sup, t_vec *buf);
+void				exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf);
+void				exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf);
+void				exe_char_string(va_list ap, char type, t_pf *sup,\
+																	t_vec *buf);
+void				exe_double(va_list ap, char type, t_pf *sup, t_vec *buf);
+/*
+**	put_buf - type functions put argument to ft_printf buffer
+*/
+void				putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf);
+void				putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf);
+/*
+void				putfloat_buf(float num, char type, t_pf *sup, t_vec *buf);
+void				butdouble_buf(long double num, char type, t_pf *sup,\
+																	t_vec *buf);
+*/
+void				putchar_buf(wchar_t c, char type, t_pf *sup, t_vec *buf);
+void				putstr_buf(char *s, char type, t_pf *sup, t_vec *buf);
+void				putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf);
+
+int					buf_wchar(wchar_t c, t_vec *buf, int bytes);
+void				str_to_buf(char *s, t_vec *buf);
+
+/*
+**	itoa_buf - converts number to ASCII and puts it to num buffer
+*/
+t_vec				*itoa_buf(long long n, t_vec *nbuf);
+t_vec				*uitoa_buf(uintmax_t n, t_vec *nbuf);
+t_vec				*itoa_base_buf(uintmax_t num, t_vec *nbuf, t_pf *sup,\
+																	char type);
 /*
 **	helper functions
 */
@@ -71,39 +109,6 @@ void				put_precision_width(t_pf *sup, t_vec *buf, int pr, int h);
 int					precision_len(wchar_t *s, t_pf *sup);
 size_t				ft_lstrlen(const wchar_t *s);
 int					wchar_bytes(wint_t c);
-/*
-**	exe_(type) functions consider type size and call the function that
-**	put an argument to the ft_printf buffer.
-*/
-void				exe_int(va_list ap, char type, t_pf *sup, t_vec *buf);
-void				exe_octal_hex(va_list ap, char type, t_pf *sup, t_vec *buf);
-void				exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf);
-void				exe_char_string(va_list ap, char type, t_pf *sup,\
-																	t_vec *buf);
-void				exe_double(va_list ap, char type, t_pf *sup, t_vec *buf);
-
-void				putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf);
-void				putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf);
-/*void				putunbr_buf(unsigned long long num, t_pf *sup, t_vec *buf);
-void				putbase_buf(uintmax_t num, char type, t_pf *sup,\
-																	t_vec *buf);
-void				putfloat_buf(float num, char type, t_pf *sup, t_vec *buf);
-void				butdouble_buf(long double num, char type, t_pf *sup,\
-																	t_vec *buf); */
-void				putchar_buf(wchar_t c, char type, t_pf *sup, t_vec *buf);
-void				putstr_buf(char *s, char type, t_pf *sup, t_vec *buf);
-void				putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf);
-
-int					buf_wchar(wchar_t c, t_vec *buf, int bytes);
-void				str_to_buf(char *s, t_vec *buf);
-
-/*
-**	itoa_buf - converts number to ASCII and puts it to num buffer
-*/
-
-t_vec				*itoa_buf(long long n, t_vec *nbuf);
-t_vec				*uitoa_buf(uintmax_t n, t_vec *nbuf);
-t_vec				*itoa_base_buf(uintmax_t num, t_vec *nbuf, t_pf *sup,\
-																	char type);
+void				wstring_buf(wchar_t *s, t_pf *sup, t_vec *buf);
 
 #endif

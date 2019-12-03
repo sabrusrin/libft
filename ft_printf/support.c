@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 18:38:04 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 21:36:19 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 23:17:15 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ int		ft_wildcard(va_list ap, char **str, t_pf *sup)
 	return (0);
 }
 
-void	put_width(t_vec *buf, t_pf *sup, char pos, char delim)
+void	put_width(t_vec *buf, t_pf *sup, char pos, char padding)
 {
 	if (sup->width > 1 && (~sup->flags & LEFT) && pos == 'R')
 		while (--sup->width)
-			ft_vpush_back(buf, &delim, sizeof(char));
+			ft_vpush_back(buf, &padding, sizeof(char));
 	else if (sup->width > 1 && sup->flags & LEFT && pos == 'L')
 		while (--sup->width)
 			ft_vpush_back(buf, " ", sizeof(char));

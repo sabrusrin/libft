@@ -6,12 +6,13 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 21:36:04 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 00:07:28 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+void	parse_flags(char **str, t_pf *sup);
 /*
 **	parses the type field
 */
@@ -36,6 +37,8 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 			exe_char_string(ap, **str, sup, buf);
 		else if (**str == 's' || **str == 'S')
 			exe_char_string(ap, **str, sup, buf);
+		else if (**str == '%')
+			putchar_buf('%', 'c', sup, buf);
 		++(*str);
 	}
 }
@@ -66,6 +69,10 @@ void	parse_length_field(char **str, t_pf *sup)
 			sup->length = 64;
 		else if (**str == 't' && ++(*str))
 			sup->length = 128;
+		if (IS_FLAG(**str))
+			parse_flags(str, sup);
+		if (!IS_TYPE(**str))
+			++(*str);
 	}
 }
 
@@ -105,18 +112,19 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 **	parses flag field; flags	#0- +
 */
 
-void	parse_flags(char **str, t_pf *sup, t_vec *buf)
+void	parse_flags(char **str, t_pf *sup)
 {
 	set_default(sup);
 	if (str && *str)
 		while (**str && IS_FLAG(**str))
 		{
-			if (**str == '%')
-				ft_vpush_back(buf, "%", sizeof(char));
-			else if (**str == '#')
+			if (**str == '#')
 				sup->flags |= HASH;
 			else if (**str == '0')
+			{
 				sup->flags |= ZERO;
+				sup->pad_char = '0';
+			}
 			else if (**str == '-')
 				sup->flags |= LEFT;
 			else if (**str == ' ' && (~sup->flags & PLUS))
@@ -153,7 +161,7 @@ int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 				ft_vpush_back(buf, str++, sizeof(char));
 			else if (*str)
 			{
-				parse_flags(&str, sup, buf);
+				parse_flags(&str, sup);
 				parse_width_preci(ap, &str, sup);
 				parse_length_field(&str, sup);
 				parse_type(ap, &str, sup, buf);
