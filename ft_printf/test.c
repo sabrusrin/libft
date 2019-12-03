@@ -38,9 +38,9 @@ int	main(void)
 	d = printf("%ll#x", 9223372036854775807);
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("%05c", 42);
+	d = ft_printf("k%lhlzkk", 9223372036854775807);
 	printf("\n%d\n", d);
-	d = printf("%05c", 42);
+	d = printf("k%lhlzkk", 9223372036854775807);
 	printf("\n%d\n\n", d);
 
 	d = ft_printf("{% %}");

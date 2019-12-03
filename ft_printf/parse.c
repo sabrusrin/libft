@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 00:07:28 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 01:14:35 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 {
 	if (str && *str && IS_TYPE(**str))
 	{
-		if (**str == 'd' || **str == 'i' || **str == 'D')
+		if (!sup->ul && (**str == 'd' || **str == 'i' || **str == 'D'))
 			exe_int(ap, **str, sup, buf);
 		else if (**str == 'o' || **str == 'O')
 			exe_octal_hex(ap, **str, sup, buf);
@@ -39,6 +39,8 @@ void	parse_type(va_list ap, char **str, t_pf *sup, t_vec *buf)
 			exe_char_string(ap, **str, sup, buf);
 		else if (**str == '%')
 			putchar_buf('%', 'c', sup, buf);
+		else if (sup->ul && (**str == 'd' || **str == 'i'))
+			exe_unsigned(ap, 'U', sup, buf);
 		++(*str);
 	}
 }
@@ -69,9 +71,11 @@ void	parse_length_field(char **str, t_pf *sup)
 			sup->length = 64;
 		else if (**str == 't' && ++(*str))
 			sup->length = 128;
-		if (IS_FLAG(**str))
+		if (sup->length == 1 && **str == 'l')
+			sup->ul = 1;
+		if (**str && IS_FLAG(**str))
 			parse_flags(str, sup);
-		if (!IS_TYPE(**str))
+		while (**str && IS_LENGTH(**str))
 			++(*str);
 	}
 }
@@ -105,6 +109,8 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 		}
 		else if (**str == '.' && ++*str)
 			sup->preci = -2;
+		if (**str && IS_FLAG(**str))
+			parse_flags(str, sup);
 	}
 }
 
@@ -114,7 +120,6 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 
 void	parse_flags(char **str, t_pf *sup)
 {
-	set_default(sup);
 	if (str && *str)
 		while (**str && IS_FLAG(**str))
 		{
@@ -153,14 +158,12 @@ int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 		if (sup->kill)
 			return (FALSE);
 		if (*str != '%')
-			ft_vpush_back(buf, str, sizeof(char));
-		else if (*(str + 1))
+			ft_vpush_back(buf, str++, sizeof(char));
+		else if (*(++str))
 		{
-			++str;
-			if (*str == '%')
-				ft_vpush_back(buf, str++, sizeof(char));
-			else if (*str)
+			if (*str)
 			{
+				set_default(sup);
 				parse_flags(&str, sup);
 				parse_width_preci(ap, &str, sup);
 				parse_length_field(&str, sup);
@@ -168,7 +171,6 @@ int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 			}
 			continue ;
 		}
-		++str;
 	}
 	return (TRUE);
 }

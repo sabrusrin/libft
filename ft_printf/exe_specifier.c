@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 23:06:47 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 22:13:02 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 01:27:56 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	exe_unsigned(va_list ap, char type, t_pf *sup, t_vec *buf)
 {
 	t_vec	*nbuf;
 
+	if (sup->flags & PLUS)
+		sup->flags ^= PLUS;
+	if (sup->flags & SPACE)
+		sup->flags ^= SPACE;
 	nbuf = ft_vnew(30, sizeof(char));
 	if ((type == 'u' && sup->length == 4) || type == 'U')
 		putnbr_buf(sup, buf, uitoa_buf(va_arg(ap, unsigned long), nbuf));

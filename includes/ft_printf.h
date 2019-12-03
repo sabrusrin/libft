@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 00:08:49 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 01:09:27 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_pf
 	unsigned char	length;
 	char			pad_char;
 	char			sign;
+	char			ul;
 	int				width;
 	int				preci;
 	int				wild;
