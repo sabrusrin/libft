@@ -33,11 +33,11 @@ int	main(void)
 	d = printf("!%52.3ls!", L"");
 	printf("\n%d\n\n", d); */
 
-	d = ft_printf("{%05.*d}", -15, 42);
+	d = ft_printf("|% -61.54zd|", 0);
 	printf("\n%d\n", d);
-	d = printf("{%05.*d}", -15, 42);
+	d = printf("|% -61.54zd|", 0);
 	printf("\n%d\n\n", d);
-
+/*
 	d = ft_printf("%#.o, %#.0o", 0, 0);
 	printf("\n%d\n", d);
 	d = printf("%#.o, %#.0o", 0, 0);
@@ -56,7 +56,7 @@ int	main(void)
 	d = ft_printf("%.o, %.0o", 0, 0);
 	printf("\n%d\n", d);
 	d = printf("%.o, %.0o", 0, 0);
-	printf("\n%d\n\n", d);
+	printf("\n%d\n\n", d); */
 
 
 /* 	d = ft_printf("|%0#15x|", -355555);

@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 18:31:37 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/26 23:11:26 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 21:38:55 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,9 @@ t_vec	*itoa_base_buf(uintmax_t num, t_vec *nbuf, t_pf *sup, char type)
 	else if (type == 'x' || type == 'X' || type == 'p')
 		base = 16;
 	if (type == 'p')
-		sup->hash = '#';
-	if (type != 'p' && sup->hash == '#' && !num)
-		sup->hash = 0;
+		sup->flags |= HASH;
+	if (type != 'p' && sup->flags & HASH && !num)
+		sup->flags ^= HASH;
 	if (num == 0)
 		*--fill = base_chars[num];
 	while (num != 0)

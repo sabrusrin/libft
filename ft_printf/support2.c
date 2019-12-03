@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 21:46:01 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/02 22:24:07 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 21:37:13 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	set_default(t_pf *sup)
 {
+	sup->flags = 0;
 	sup->length = 0;
-	sup->hash = 0;
-	sup->zero = 0;
-	sup->minus = 0;
-	sup->space = 0;
-	sup->plus = 0;
 	sup->width = 0;
 	sup->sign = 0;
 	sup->preci = -1;

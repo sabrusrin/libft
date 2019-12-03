@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 00:24:31 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 21:37:30 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stddef.h>
 # include <wchar.h>
 # include "libft.h"
+
 # define IS_FLAG(x) (ft_strchr("#0- +' %", x))
 # define IS_TYPE(x) (ft_strchr("dDioOuUxXfFeEcCsSpaAgGpb", x))
 # define IS_LENGTH(x) (ft_strchr("lLhjzt", x))
@@ -26,14 +27,18 @@
 # define TRUE 1
 # define FALSE 0
 
+# define HASH 1
+# define ZERO 2
+# define PLUS 4
+# define LEFT 8
+# define SPACE 16
+
+//# define HH
+
 typedef struct		s_pf
 {
+	char			flags;
 	unsigned char	length;
-	char			hash;
-	char			zero;
-	char			minus;
-	char			space;
-	char			plus;
 	char			sign;
 	int				width;
 	int				preci;

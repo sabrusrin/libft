@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 00:37:24 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 21:46:12 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,21 @@
 
 void	zero_padding(t_pf *sup, t_vec *buf, int wlen, int i)
 {
-	if (sup->plus == '+' || i)
+	if (sup->flags & PLUS || i)
 		ft_vpush_back(buf, &sup->sign, sizeof(char));
 	sup->width -= ((sup->width > wlen) ? wlen : sup->width);
-	if (sup->space == ' ' && sup->sign != '-' && sup->plus != '+')
-		ft_vpush_back(buf, &sup->space, sizeof(char));
+	if (sup->flags & SPACE && sup->sign != '-' && (~sup->flags & PLUS))
+		ft_vpush_back(buf, " ", sizeof(char));
 	put_full_width(buf, sup, 'R', '0');
 }
 
 void	space_padding(t_pf *sup, t_vec *buf, int wlen, int i)
 {
 	sup->width -= ((sup->width > wlen) ? wlen : sup->width);
-	if (sup->space == ' ' && sup->sign != '-' &&\
-														sup->plus != '+')
-		ft_vpush_back(buf, &sup->space, sizeof(char));
+	if (sup->flags & SPACE && sup->sign != '-' && (~sup->flags & PLUS))
+		ft_vpush_back(buf, " ", sizeof(char));
 	put_full_width(buf, sup, 'R', ' ');
-	if (sup->plus == '+' || i)
+	if (sup->flags & PLUS || i)
 		ft_vpush_back(buf, &sup->sign, sizeof(char));
 }
 
@@ -49,15 +48,15 @@ void	precision_nbr(t_pf *sup, t_vec *buf, t_vec *nbuf, int len)
 	i = 0;
 	if (*(char*)ft_vat(nbuf, 0) == '-')
 		i = 1;
-	sup->preci -= !i || (!i && sup->plus == '+') ? nbuf->size : nbuf->size - 1;
+	sup->preci -= !i || (!i && sup->flags & PLUS) ? nbuf->size : nbuf->size - 1;
 	len += sup->preci;
 	sup->width -= ((sup->width > len) ? len : sup->width);
-	if (sup->space == ' ' && sup->sign != '-' && sup->plus != '+')
-		ft_vpush_back(buf, &sup->space, sizeof(char));
+	if (sup->flags & SPACE && sup->sign != '-' && (~sup->flags & PLUS))
+		ft_vpush_back(buf, " ", sizeof(char));
 	put_full_width(buf, sup, 'R', ' ');
 	if (sup->sign == '-')
 		ft_vpush_back(buf, "-", sizeof(char));
-	else if (sup->plus == '+')
+	else if (sup->flags & PLUS)
 	{
 		ft_vpush_back(buf, "+", sizeof(char));
 		i = 1;
@@ -82,10 +81,10 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 	len = ((sup->preci == 0 || sup->preci == -2) && sup->wild) ? 0 : nbuf->size;
 	if (*(char*)ft_vat(nbuf, 0) == '-')
 		i = 1;
-	wlen = len + ((!i && (sup->plus == '+' || sup->space == ' ')) ? 1 : 0);
+	wlen = len + ((!i && (sup->flags & PLUS || sup->flags & SPACE)) ? 1 : 0);
 	if (sup->preci > len || (i && sup->preci > (len - 1)))
 		precision_nbr(sup, buf, nbuf, wlen);
-	else if (sup->zero == '0' && sup->minus != '-' && sup->preci < 0 &&\
+	else if ((sup->flags & ZERO) && (~sup->flags & LEFT) && sup->preci < 0 &&\
 														sup->preci != -2)
 		zero_padding(sup, buf, wlen, i);
 	else
@@ -110,7 +109,7 @@ void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
 //	if ((type == 'o' || type == 'O') && sup->hash == '#' && (sup->preci == 0 || sup->preci == -2))
 	sup->preci -= (sup->preci > 0 && sup->preci > len) ? len : sup->preci;
 	wlen = len + sup->preci;
-	if (sup->hash == '#')
+	if (sup->flags & HASH)
 		do_hash(sup, &wlen, &h, type);
 	sup->width -= (sup->width > wlen + h) ? wlen + h : sup->width;
 	put_precision_width(sup, buf, pr, h);

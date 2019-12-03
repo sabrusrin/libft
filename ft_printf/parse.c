@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 00:40:23 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 21:36:04 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 }
 
 /*
-**	parses flags field; flags	#0- +
+**	parses flag field; flags	#0- +
 */
 
 void	parse_flags(char **str, t_pf *sup, t_vec *buf)
@@ -114,18 +114,18 @@ void	parse_flags(char **str, t_pf *sup, t_vec *buf)
 			if (**str == '%')
 				ft_vpush_back(buf, "%", sizeof(char));
 			else if (**str == '#')
-				sup->hash = '#';
+				sup->flags |= HASH;
 			else if (**str == '0')
-				sup->zero = '0';
+				sup->flags |= ZERO;
 			else if (**str == '-')
-				sup->minus = '-';
-			else if (**str == ' ' && sup->plus != '+')
-				sup->space = ' ';
+				sup->flags |= LEFT;
+			else if (**str == ' ' && (~sup->flags & PLUS))
+				sup->flags |= SPACE;
 			else if (**str == '+')
 			{
-				sup->plus = '+';
-				if (sup->space == ' ')
-					sup->space = 0;
+				sup->flags |= PLUS;
+				if (sup->flags & SPACE)
+					sup->flags ^= SPACE;
 			}
 			++(*str);
 		}

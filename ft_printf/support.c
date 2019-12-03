@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 18:38:04 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 00:24:34 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 21:36:19 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_wildcard(va_list ap, char **str, t_pf *sup)
 	{
 		arg = va_arg(ap, int);
 		if (arg < 0 && *(*str - 2) != '.' && (arg *= -1))
-			sup->minus = '-';
+			sup->flags |= LEFT;
 		return (arg);
 	}
 	return (0);
@@ -29,23 +29,23 @@ int		ft_wildcard(va_list ap, char **str, t_pf *sup)
 
 void	put_width(t_vec *buf, t_pf *sup, char pos, char delim)
 {
-	if (sup->width > 1 && sup->minus != '-' && pos == 'R')
+	if (sup->width > 1 && (~sup->flags & LEFT) && pos == 'R')
 		while (--sup->width)
 			ft_vpush_back(buf, &delim, sizeof(char));
-	else if (sup->width > 1 && sup->minus == '-' && pos == 'L')
+	else if (sup->width > 1 && sup->flags & LEFT && pos == 'L')
 		while (--sup->width)
 			ft_vpush_back(buf, " ", sizeof(char));
 }
 
 void	put_full_width(t_vec *buf, t_pf *sup, char pos, char delim)
 {
-	if (sup->width >= 1 && sup->minus != '-' && pos == 'R')
+	if (sup->width >= 1 && (~sup->flags & LEFT) && pos == 'R')
 		while (sup->width)
 		{
 			ft_vpush_back(buf, &delim, sizeof(char));
 			sup->width--;
 		}
-	else if (sup->width >= 1 && sup->minus == '-' && pos == 'L')
+	else if (sup->width >= 1 && sup->flags & LEFT && pos == 'L')
 		while (sup->width)
 		{
 			ft_vpush_back(buf, " ", sizeof(char));
@@ -82,7 +82,8 @@ void	put_precision_width(t_pf *sup, t_vec *buf, int pr, int h)
 		while (sup->preci--)
 			ft_vpush_back(buf, "0", sizeof(char));
 	}
-	else if (sup->width > 0 && sup->zero == '0' && sup->minus == 0 && pr < 0)
+	else if (sup->width > 0 && sup->flags & ZERO && (~sup->flags & LEFT) &&\
+																		pr < 0)
 	{
 		while (h--)
 			ft_vpush_back(buf, sup->hash_symb++, sizeof(char));
