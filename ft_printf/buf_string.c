@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 22:09:21 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 23:00:16 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:18:38 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 	sup->width -= (sup->width > len) ? len : sup->width;
 	put_full_width(buf, sup, 'R', sup->pad_char);
 	wstring_buf(s, sup, buf);
-
 	put_full_width(buf, sup, 'L', ' ');
 }
 

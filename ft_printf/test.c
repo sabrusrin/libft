@@ -55,9 +55,9 @@ int	main(void)
 	d = printf("%#.o, %#.0o", 0, 0);
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("%#o, %#o", 0, 0);
+	d = ft_printf("@moulitest: %.d %.0d", 42, 43);
 	printf("\n%d\n", d);
-	d = printf("%#o, %#o", 0, 0);
+	d = printf("@moulitest: %.d %.0d", 42, 43);
 	printf("\n%d\n\n", d);
 
 	d = ft_printf("%#.o", 42);

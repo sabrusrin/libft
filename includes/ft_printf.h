@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 14:34:50 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 22:11:24 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct		s_pf
 	int				width;
 	int				preci;
 	int				wild;
+	int				num;
 	char			*hash_symb;
 	int				kill;
 }					t_pf;

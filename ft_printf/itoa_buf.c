@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 18:31:37 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 14:50:53 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:32:03 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,22 @@ t_vec	*itoa_base_buf(uintmax_t num, t_vec *nbuf, t_pf *sup, char type)
 
 	fill = &buff[49];
 	*fill = '\0';
+	sup->num = num;
 	base_chars = (type != 'X') ? "0123456789abcdef" : "0123456789ABCDEF";
+	base = 16;
 	if (type == 'o' || type == 'O')
 		base = 8;
-	else if (type == 'x' || type == 'X' || type == 'p')
-		base = 16;
 	if (type == 'p')
 		sup->flags |= HASH;
-	if (type != 'p' && sup->flags & HASH && !num)
+	if (sup->flags & HASH && (type == 'o' || type == 'O') &&\
+										(sup->preci == -2 || sup->preci == 0))
+		;
+	else if (type != 'p' && sup->flags & HASH && !num)
 		sup->flags ^= HASH;
 	if (num == 0)
 		*--fill = base_chars[num];
-	while (num != 0)
-	{
-		*--fill = base_chars[num % base];
+	while (num != 0 && (*--fill = base_chars[num % base]))
 		num /= base;
-	}
 	str_to_buf(fill, nbuf);
 	return (nbuf);
 }

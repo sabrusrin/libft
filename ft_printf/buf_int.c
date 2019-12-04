@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/03 23:16:17 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:18:54 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 	int	i;
 
 	i = 0;
+	if (*(char*)ft_vat(nbuf, 0) != '0' && (sup->preci == -2 || sup->preci == 0))
+		sup->preci = -1;
 	len = ((sup->preci == 0 || sup->preci == -2) && sup->wild) ? 0 : nbuf->size;
 	if (*(char*)ft_vat(nbuf, 0) == '-')
 	{
@@ -106,9 +108,10 @@ void	putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf)
 
 	h = 0;
 	i = 0;
+	if (sup->num > 0 && (sup->preci == -2 || sup->preci == 0))
+		sup->preci = -1;
 	pr = sup->preci;
 	len = (sup->preci == 0 || sup->preci == -2) ? 0 : nbuf->size;
-//	if ((type == 'o' || type == 'O') && sup->hash == '#' && (sup->preci == 0 || sup->preci == -2))
 	sup->preci -= (sup->preci > 0 && sup->preci > len) ? len : sup->preci;
 	wlen = len + sup->preci;
 	if (sup->flags & HASH)

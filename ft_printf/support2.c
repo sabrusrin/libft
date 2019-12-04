@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 21:46:01 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 01:09:52 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:20:10 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_default(t_pf *sup)
 	sup->kill = FALSE;
 }
 
-int	precision_len(wchar_t *s, t_pf *sup)
+int		precision_len(wchar_t *s, t_pf *sup)
 {
 	t_vec	*buf;
 	int		tmp;
