@@ -6,13 +6,12 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 01:14:35 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 14:51:46 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	parse_flags(char **str, t_pf *sup);
 /*
 **	parses the type field
 */
@@ -86,32 +85,29 @@ void	parse_length_field(char **str, t_pf *sup)
 
 void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 {
-	if (str && *str)
+	if (**str && (ft_isdigit(**str) || **str == '*'))
 	{
-		if (**str && (ft_isdigit(**str) || **str == '*'))
-		{
-			if (**str == '*')
-				sup->wild = ft_wildcard(ap, str, sup);
-			if (ft_isdigit(**str))
-				sup->width = ft_atoi_move(str);
-			else
-				sup->width = sup->wild;
-		}
-		if (**str == '.' && (ft_isdigit(*(*str + 1)) || *(*str + 1) == '*'))
-		{
-			if (*(++(*str)) != '*')
-				sup->preci = ft_atoi_move(str);
-			else
-			{
-				sup->wild = ft_wildcard(ap, str, sup);
-				sup->preci = sup->wild;
-			}
-		}
-		else if (**str == '.' && ++*str)
-			sup->preci = -2;
-		if (**str && IS_FLAG(**str))
-			parse_flags(str, sup);
+		if (**str == '*')
+			sup->wild = ft_wildcard(ap, str, sup);
+		if (ft_isdigit(**str))
+			sup->width = ft_atoi_move(str);
+		else
+			sup->width = sup->wild;
 	}
+	if (**str == '.' && (ft_isdigit(*(*str + 1)) || *(*str + 1) == '*'))
+	{
+		if (*(++(*str)) != '*')
+			sup->preci = ft_atoi_move(str);
+		else
+		{
+			sup->wild = ft_wildcard(ap, str, sup);
+			sup->preci = sup->wild;
+		}
+	}
+	else if (**str == '.' && ++*str)
+		sup->preci = -2;
+	if (**str && IS_FLAG(**str))
+		parse_flags(str, sup);
 }
 
 /*
@@ -161,14 +157,11 @@ int		parse_format(va_list ap, const char *format, t_vec *buf, t_pf *sup)
 			ft_vpush_back(buf, str++, sizeof(char));
 		else if (*(++str))
 		{
-			if (*str)
-			{
-				set_default(sup);
-				parse_flags(&str, sup);
-				parse_width_preci(ap, &str, sup);
-				parse_length_field(&str, sup);
-				parse_type(ap, &str, sup, buf);
-			}
+			set_default(sup);
+			parse_flags(&str, sup);
+			parse_width_preci(ap, &str, sup);
+			parse_length_field(&str, sup);
+			parse_type(ap, &str, sup, buf);
 			continue ;
 		}
 	}

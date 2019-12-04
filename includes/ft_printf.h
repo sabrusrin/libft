@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 01:09:27 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/04 14:34:50 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_pf
 
 /*
 **	ft_printf - produces output according to a format;
-**	Write output to stdout.
+**	Writes output to stdout.
 */
 int					ft_printf(const char *format, ...);
 /*
@@ -64,6 +64,7 @@ int					ft_dprintf(int fd, const char *format, ...);
 */
 int					parse_format(va_list ap, const char *format, t_vec *buf,\
 																	t_pf *sup);
+void				parse_flags(char **str, t_pf *sup);
 /*
 **	exe_(type) functions consider type size and call the function that
 **	put an argument to the ft_printf buffer.
@@ -80,9 +81,9 @@ void				exe_double(va_list ap, char type, t_pf *sup, t_vec *buf);
 void				putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf);
 void				putbase_buf(t_pf *sup, t_vec *buf, char type, t_vec *nbuf);
 /*
-void				putfloat_buf(float num, char type, t_pf *sup, t_vec *buf);
-void				butdouble_buf(long double num, char type, t_pf *sup,\
-																	t_vec *buf);
+**void				putfloat_buf(float num, char type, t_pf *sup, t_vec *buf);
+**void				butdouble_buf(long double num, char type, t_pf *sup,\
+**																t_vec *buf);
 */
 void				putchar_buf(wchar_t c, char type, t_pf *sup, t_vec *buf);
 void				putstr_buf(char *s, char type, t_pf *sup, t_vec *buf);
