@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 22:09:21 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/25 00:37:52 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:18:38 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 		len = sup->preci;
 	}
 	sup->width -= ((sup->width > len) ? len : sup->width);
-	put_full_width(buf, sup, 'R', ' ');
+	put_full_width(buf, sup, 'R', sup->pad_char);
 	if (sup->preci < 0 && sup->preci != -2)
 		str_to_buf(s, buf);
 	else if (sup->preci != 0 && sup->preci != -2)
@@ -50,9 +50,7 @@ void	putstr_buf(char *s, char type, t_pf *sup, t_vec *buf)
 void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 {
 	int	len;
-	int	bytes;
 
-	bytes = 0;
 	(!s ? (s = L"(null)") : 0);
 	len = (sup->preci == 0 || sup->preci == -2) ? 0 : ft_lstrlen(s);
 	if (type == 's' && sup->preci != -1 && sup->preci < len)
@@ -60,7 +58,16 @@ void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 	else
 		sup->preci = -1;
 	sup->width -= (sup->width > len) ? len : sup->width;
-	put_full_width(buf, sup, 'R', ' ');
+	put_full_width(buf, sup, 'R', sup->pad_char);
+	wstring_buf(s, sup, buf);
+	put_full_width(buf, sup, 'L', ' ');
+}
+
+void	wstring_buf(wchar_t *s, t_pf *sup, t_vec *buf)
+{
+	int	bytes;
+
+	bytes = 0;
 	if (sup->preci < 0)
 		while (*s)
 			buf_wchar(*(s++), buf, 0);
@@ -77,5 +84,4 @@ void	putlstr_buf(wchar_t *s, char type, t_pf *sup, t_vec *buf)
 			}
 			s++;
 		}
-	put_full_width(buf, sup, 'L', ' ');
 }

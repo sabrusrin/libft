@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/19 17:52:24 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 12:10:52 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/03 22:59:06 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	putchar_buf(wchar_t c, char type, t_pf *sup, t_vec *buf)
 		sup->kill = TRUE;
 		return ;
 	}
-	put_width(buf, sup, 'R', ' ');
+	put_width(buf, sup, 'R', sup->pad_char);
 	if (type == 'c' && sup->length == 0)
 		ft_vpush_back(buf, &a, sizeof(char));
 	else if ((type == 'c' && sup->length == 4) || (type == 'C' && !sup->length))

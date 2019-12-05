@@ -6,7 +6,7 @@
 #    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/11/26 00:28:06 by chermist         ###   ########.fr        #
+#    Updated: 2019/12/05 18:12:51 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -140,7 +140,7 @@ vpath %.c vector
 vpath %.c queue
 vpath %.c ft_printf
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -Ofast
 
 all: $(NAME)
 
@@ -149,7 +149,7 @@ $(NAME): $(OBJ)
 		ranlib $(NAME)
 
 %.o: %.c
-	gcc $(FLAGS) $(INC) -c $< -o $@
+	clang $(FLAGS) $(INC) -c $< -o $@
 
 
 clean:

@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 21:46:01 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/24 21:49:21 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/05 00:20:10 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 
 void	set_default(t_pf *sup)
 {
+	sup->flags = 0;
 	sup->length = 0;
-	sup->hash = 0;
-	sup->zero = 0;
-	sup->minus = 0;
-	sup->space = 0;
-	sup->plus = 0;
 	sup->width = 0;
-	sup->sign = 0;
+	sup->ul = 0;
+	sup->pad_char = ' ';
+	sup->sign = '+';
 	sup->preci = -1;
+	sup->wild = 1;
 	sup->hash_symb = NULL;
 	sup->kill = FALSE;
 }
 
-int	precision_len(wchar_t *s, t_pf *sup)
+int		precision_len(wchar_t *s, t_pf *sup)
 {
 	t_vec	*buf;
 	int		tmp;
