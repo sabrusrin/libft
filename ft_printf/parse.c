@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:05:31 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 14:51:46 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/06 23:34:27 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	parse_width_preci(va_list ap, char **str, t_pf *sup)
 			sup->preci = sup->wild;
 		}
 	}
-	else if (**str == '.' && ++*str)
+	while ((**str == '.' || isdigit(**str)) && ++*str)
 		sup->preci = -2;
 	if (**str && IS_FLAG(**str))
 		parse_flags(str, sup);

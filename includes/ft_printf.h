@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/17 19:12:45 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/04 22:11:24 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/06 21:06:09 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 # define LEFT 8
 # define SPACE 16
 
-//# define HH
-
 typedef struct		s_pf
 {
 	char			flags;
@@ -49,7 +47,6 @@ typedef struct		s_pf
 	char			*hash_symb;
 	int				kill;
 }					t_pf;
-
 /*
 **	ft_printf - produces output according to a format;
 **	Writes output to stdout.
@@ -57,7 +54,7 @@ typedef struct		s_pf
 int					ft_printf(const char *format, ...);
 /*
 **	ft_dprintf - produces output according to a format;
-**	Write output to the given file descriptor.
+**	Writes output to the given file descriptor.
 */
 int					ft_dprintf(int fd, const char *format, ...);
 /*
