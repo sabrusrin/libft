@@ -1,4 +1,0 @@
-This is the first line
-This is the second one
-This is the third
-This is the last

@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/20 01:40:51 by chermist          #+#    #+#             */
-/*   Updated: 2019/12/05 00:18:54 by chermist         ###   ########.fr       */
+/*   Updated: 2019/12/07 00:00:13 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	putnbr_buf(t_pf *sup, t_vec *buf, t_vec *nbuf)
 	int	i;
 
 	i = 0;
-	if (*(char*)ft_vat(nbuf, 0) != '0' && (sup->preci == -2 || sup->preci == 0))
-		sup->preci = -1;
-	len = ((sup->preci == 0 || sup->preci == -2) && sup->wild) ? 0 : nbuf->size;
+	len = nbuf->size;
+	if ((sup->preci == 0 || sup->preci == -2) && *(char*)ft_vat(nbuf, 0) == '0')
+		len = 0;
 	if (*(char*)ft_vat(nbuf, 0) == '-')
 	{
 		sup->sign = '-';

@@ -50,19 +50,19 @@ int	main(void)
 
 
  */
-	d = ft_printf("%#.o, %#.0o", 0, 0);
+	d = ft_printf("@main_ftprintf: %####0000 33..1..#00d\n", 256);
 	printf("\n%d\n", d);
-	d = printf("%#.o, %#.0o", 0, 0);
+	d = printf("@main_ftprintf: %####0000 33..1..#00d\n", 256);
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("@moulitest: %.d %.0d", 42, 43);
+	d = ft_printf("@main_ftprintf: %####0000 33..1d", 256);
 	printf("\n%d\n", d);
-	d = printf("@moulitest: %.d %.0d", 42, 43);
+	d = printf("@main_ftprintf: %####0000 33..1d", 256);
 	printf("\n%d\n\n", d);
 
-	d = ft_printf("%#.o", 42);
+	d = ft_printf("%#.d", 42);
 	printf("\n%d\n", d);
-	d = printf("%#.o", 42);
+	d = printf("%#.d", 42);
 	printf("\n%d\n\n", d);
 
 	d = ft_printf("%.o, %.0o", 0, 0);
