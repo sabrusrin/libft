@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rb_trees.h                                         :+:      :+:    :+:   */
+/*   bsearch_tree.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/07 19:20:31 by chermist          #+#    #+#             */
-/*   Updated: 2020/02/10 20:16:34 by chermist         ###   ########.fr       */
+/*   Created: 2020/02/10 20:22:41 by chermist          #+#    #+#             */
+/*   Updated: 2020/02/10 20:35:34 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RB_TREES_H
-# define RB_TREES_H
-
+#ifndef BSEARCH_TREE_H
+# define BSEARCH_TREE_H
 # include "libft.h"
 
-typedef struct		s_rbtree
+typedef struct		s_stree
 {
 	int				color;
 	void			*key;
+	void			*data;
 	struct s_rbtree	*left;
 	struct s_rbtree	*right;
 	struct s_rbtree	*p;
 //	void			*p
-}				t_rbtree;
+}				t_stree;
 
 #endif
