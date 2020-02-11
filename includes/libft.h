@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/23 15:22:05 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 19:02:15 by chermist         ###   ########.fr       */
+/*   Updated: 2020/02/12 00:14:11 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "get_next_line.h"
 # include "vector.h"
 # include "queue.h"
+# include "bsearch_tree.h"
 # include "ft_printf.h"
 
 typedef struct		s_list
