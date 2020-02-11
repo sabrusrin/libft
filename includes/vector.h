@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 19:50:26 by chermist          #+#    #+#             */
-/*   Updated: 2019/11/21 19:11:28 by chermist         ###   ########.fr       */
+/*   Updated: 2020/02/11 21:45:27 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define VECTOR_H
 
 /*
-**A structure to represent a vector
-**Structure parameters:
+** A structure to represent a vector
+** Structure parameters:
 **	data - stores a vector elements.
 **	size - a size of data stored.
 **	capacity - number of elements that the vector could contain without.
