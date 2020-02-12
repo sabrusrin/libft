@@ -6,7 +6,7 @@
 #    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2019/12/07 00:19:43 by chermist         ###   ########.fr        #
+#    Updated: 2020/02/12 20:27:32 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,8 +122,16 @@ PRINTF = ft_printf.c \
 		support.c \
 		support2.c
 
+BST =	ft_bst_newnode.c \
+		ft_bst_insert.c \
+		ft_bst_search.c \
+		ft_bst_delete.c \
+		ft_bst_min.c \
+		ft_bst_max.c \
+		ft_bst_keycomp.c
+
 SRCS =	$(MEM_F) $(STR_F) $(CHR_F) $(PUT_F) $(LST_F) \
-		$(MY_F) $(MATH_F) $(VEC_F) $(MY_F) $(Q_F) $(PRINTF)
+		$(MY_F) $(MATH_F) $(VEC_F) $(MY_F) $(Q_F) $(PRINTF) $(BST)
 
 INC = -I./includes
 
@@ -139,6 +147,7 @@ vpath %.c math
 vpath %.c vector
 vpath %.c queue
 vpath %.c ft_printf
+vpath %.c bsearch_tree
 
 FLAGS = -Wall -Wextra -Werror -Ofast
 

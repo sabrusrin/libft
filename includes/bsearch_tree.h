@@ -6,7 +6,7 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 20:22:41 by chermist          #+#    #+#             */
-/*   Updated: 2020/02/12 00:11:03 by chermist         ###   ########.fr       */
+/*   Updated: 2020/02/12 23:11:39 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,19 @@ typedef enum	e_bstree_key_type
 */
 typedef struct		s_bstree
 {
-	int				key;
+	void			*key;
 	void			*data;
 	size_t			data_sz;
 	struct s_bstree	*left;
 	struct s_bstree	*right;
+	struct s_bstree	*parent;
 	t_bst_key_type	k_type;
-//	struct s_bstree	*parent;
 }				t_bstree;
 /*
 **ft_bst_newnode - Creates a new node. Returns a pointer to created node.
 */
 t_bstree			*ft_bst_newnode(void *key, void const *data, size_t size,
-													t_bst_key_type key_type);
+										int key_size, t_bst_key_type key_type);
 /*
 **ft_bst_insert - Creates a new node, puts data into it and
 **					inserts this node to the tree.
@@ -60,11 +60,11 @@ void				*ft_bst_search(t_bstree *root, void *key, \
 /*
 **
 */
-void				*ft_bst_minimum(t_bstree *root);
+t_bstree	*ft_bst_minimum(t_bstree *node);
 /*
 **
 */
-void				*ft_bst_maximum(t_bstree *root);
+t_bstree	*ft_bst_maximum(t_bstree *node);
 /*
 **
 */

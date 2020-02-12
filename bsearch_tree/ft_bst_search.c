@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tree_insert.c                                      :+:      :+:    :+:   */
+/*   ft_bst_search.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 22:49:01 by chermist          #+#    #+#             */
-/*   Updated: 2020/02/12 00:08:06 by chermist         ###   ########.fr       */
+/*   Created: 2020/02/11 19:35:25 by chermist          #+#    #+#             */
+/*   Updated: 2020/02/12 20:31:32 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bst_insert(t_bstree **root, t_bstree *node, int *f(void*, void*))
+void	*ft_bst_search(t_bstree *root, void *key, int *f(void*, void*))
 {
-	t_bstree	*y;
-	t_bstree	*x;
-
-	y = NULL;
-	x = *root;
-	while (x != NULL)
-	{
-		y = x;
-		if (ft_bst_keycomp(node->key, x->key, node->k_type, f) <= 0)
-			x = x->left;
-		else
-			x = x->right;
-	}
-	if (y == NULL)
-		*root = node;
-	else if (ft_bst_keycomp(node->key, y->key, node->k_type, f) <= 0)
-		y->left = node;
+	if (root == NULL)
+		return (NULL);
+	if (ft_bst_keycomp(root->key, key, root->k_type, f) == 0)
+		return (root->data);
+	if (ft_bst_keycomp(key, root->key, root->k_type, f) < 0)
+		return (ft_bst_search(root->left, key, f));
 	else
-		y->right = node;
+		return (ft_bst_search(root->right, key, f));
 }
