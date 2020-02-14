@@ -6,7 +6,7 @@
 #    By: chermist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/27 22:25:22 by chermist          #+#    #+#              #
-#    Updated: 2020/02/12 20:27:32 by chermist         ###   ########.fr        #
+#    Updated: 2020/02/14 19:56:43 by chermist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -149,22 +149,26 @@ vpath %.c queue
 vpath %.c ft_printf
 vpath %.c bsearch_tree
 
-FLAGS = -Wall -Wextra -Werror -Ofast
+FLAGS =  -Ofast
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-		ar rc $(NAME) $(OBJ)
-		ranlib $(NAME)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	@printf "\033[1;32m$(NAME) was built\033[0m"
 
 %.o: %.c
-	clang $(FLAGS) $(INC) -c $< -o $@
+	@clang $(FLAGS) $(INC) -c $< -o $@
+	@printf "\033[0;32mCompiling... %-21s => %-21s\r\033[0m" $< $@
 
 
 clean:
-		rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "\033[0;31mlibft object files removed\033[0m"
 
 fclean: clean
-		rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo "\033[1;31mRemoved $(NAME)\033[0m"
 
 re: fclean all

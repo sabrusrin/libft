@@ -6,30 +6,29 @@
 /*   By: chermist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 19:38:03 by chermist          #+#    #+#             */
-/*   Updated: 2020/02/12 23:27:42 by chermist         ###   ########.fr       */
+/*   Updated: 2020/02/14 20:39:59 by chermist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bstree *ft_bst_newnode(void *key, void const *data, size_t size, int key_size,
-														t_bst_key_type key_type)
+t_bstree *ft_bst_newnode(void const *key, void const *data, size_t size,
+										int key_size, t_bst_key_type key_type)
 {
 	t_bstree	*new_node;
 
 	if (!(new_node = malloc(sizeof(t_bstree))))
 		return (NULL);
-	if (!(new_node->data = malloc(size))) //&&
-//		!(new_node->key = malloc(key_size)))
+	if (!(new_node->data = malloc(size)) ||
+		!(new_node->key = malloc(key_size)))
 	{
 		ft_memdel((void**)&new_node);
 		return (NULL);
 	}
 	if (data)
 		ft_memcpy(new_node->data, data, size);
-//	if (key)
-//		ft_memmove(new_node->key, key, key_size);
-	new_node->key = key;
+	if (key)
+		ft_memcpy(new_node->key, key, key_size);
 	new_node->data_sz = size;
 	new_node->left = NULL;
 	new_node->right = NULL;
